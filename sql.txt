@@ -1,0 +1,26 @@
+CREATE TABLE user
+(
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	name varchar(100) NOT NULL,
+	login varchar(40) NOT NULL,
+	email varchar(60) NOT NULL UNIQUE,
+	password varchar(40) NOT NULL
+)
+
+CREATE TABLE posts
+(
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	content LONGTEXT,
+	type int NOT NULL,
+	author_id int NOT NULL
+	FOREIGN KEY posts(author_id) REFERENCES user(id)
+)
+
+CREATE VIEW vwPosts AS
+SELECT posts.id AS post_id, posts.content as post_content, posts.type as post_type, user.id AS user_id, user.name as user_name
+FROM posts
+INNER JOIN user
+ON posts.author_id=user.id;
+
+INSERT INTO user (name, login, email, password)
+VALUES ('Diego Mi Campos', 'diegomi', 'diegomister@gmail.com', '1234');

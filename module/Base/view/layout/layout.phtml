@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Main view</title>
+
+    <!-- css -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+        ->prependStylesheet($this->basePath() . '/font-awesome/css/font-awesome.css')
+        ->prependStylesheet($this->basePath() . '/font-awesome/css/font-awesome.css')
+        ->prependStylesheet($this->basePath() . '/css/style.css') ?>
+
+</head>
+
+<body class="md-skin fixed-nav">
+
+<div id="wrapper">
+
+    <!-- offcanvas -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                    <span class="block text-center block">
+                            <img alt="image" class="img-circle" src="<?php echo($this->basePath() . '/'); ?>img/profile_small.jpg">
+                        </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear text-center">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">David Williams</strong>
+                                </span>
+                                <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="mailbox.html">Mailbox</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        IN+
+                    </div>
+                </li>
+                <li class="active">
+                    <a href="feed"><i class="fa fa-th-large"></i> <span class="nav-label">Feed</span></a>
+                </li>
+                <li>
+                    <a href="Postar"><i class="fa fa-th-large"></i> <span class="nav-label">Postar</span></a>
+                </li>
+                <li>
+                    <a href="feed3.html"><i class="fa fa-th-large"></i> <span class="nav-label">Feed3</span></a>
+                </li>
+                <li>
+                    <a href="friends.html"><i class="fa fa-th-large"></i> <span class="nav-label">Friends</span></a>
+                </li>
+                <li>
+                    <a href="friendsSearch.html"><i class="fa fa-th-large"></i> <span class="nav-label">Search Friends</span></a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <!-- offcanvas -->
+
+
+    <div id="page-wrapper" class="gray-bg sidebar-content">
+        <!-- header -->
+        <div class="row border-bottom">
+            <nav class="navbar  navbar-fixed-top white-bg" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" method="post" action="#">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <!-- header -->
+
+        <!-- menu secundario - esquerda -->
+        <div class="sidebard-panel" style="min-height: 1185px;">
+            <div>
+                <h4>Messages <span class="badge badge-info pull-right">16</span></h4>
+                <div class="feed-element">
+                    <a href="#" class="pull-left">
+                        <img alt="image" class="img-circle" src="<?php echo($this->basePath() . '/'); ?>img/a1.jpg">
+                    </a>
+                    <div class="media-body">
+                        There are many variations of passages of Lorem Ipsum available.
+                        <br>
+                        <small class="text-muted">Today 4:21 pm</small>
+                    </div>
+                </div>
+                <div class="feed-element">
+                    <a href="#" class="pull-left">
+                        <img alt="image" class="img-circle" src="<?php echo($this->basePath() . '/'); ?>img/a2.jpg">
+                    </a>
+                    <div class="media-body">
+                        TIt is a long established fact that.
+                        <br>
+                        <small class="text-muted">Yesterday 2:45 pm</small>
+                    </div>
+                </div>
+                <div class="feed-element">
+                    <a href="#" class="pull-left">
+                        <img alt="image" class="img-circle" src="<?php echo($this->basePath() . '/'); ?>img/a3.jpg">
+                    </a>
+                    <div class="media-body">
+                        Many desktop publishing packages.
+                        <br>
+                        <small class="text-muted">Yesterday 1:10 pm</small>
+                    </div>
+                </div>
+                <div class="feed-element">
+                    <a href="#" class="pull-left">
+                        <img alt="image" class="img-circle" src="<?php echo($this->basePath() . '/'); ?>img/a4.jpg">
+                    </a>
+                    <div class="media-body">
+                        The generated Lorem Ipsum is therefore always free.
+                        <br>
+                        <small class="text-muted">Monday 8:37 pm</small>
+                    </div>
+                </div>
+            </div>
+            <div class="m-t-md">
+                <h4>Discussion</h4>
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="badge badge-primary">16</span>
+                            General topic
+                        </li>
+                        <li class="list-group-item ">
+                            <span class="badge badge-info">12</span>
+                            The generated Lorem
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge badge-warning">7</span>
+                            There are many variations
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- fim menu secundario - esquerda -->
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+            <?php echo $this->content; ?>
+        </div>
+
+        </div>
+
+        <!-- footer -->
+        <div class="footer fixed">
+            <div class="pull-right">
+                10GB of <strong>250GB</strong> Free.
+            </div>
+            <div>
+                <strong>Copyright</strong> Example Company &copy; 2014-2015
+            </div>
+        </div>
+        <!-- fim footer -->
+
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="<?php echo($this->basePath() . '/'); ?>js/jquery-2.1.1.js"></script>
+    <script src="<?php echo($this->basePath() . '/'); ?>js/bootstrap.min.js"></script>
+    <script src="<?php echo($this->basePath() . '/'); ?>js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="<?php echo($this->basePath() . '/'); ?>js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="<?php echo($this->basePath() . '/'); ?>js/inspinia.js"></script>
+    <script src="<?php echo($this->basePath() . '/'); ?>js/plugins/pace/pace.min.js"></script>
+
+
+</body>
+
+</html>

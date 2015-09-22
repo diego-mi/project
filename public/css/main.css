@@ -1,0 +1,44 @@
+/* POSTAR */
+.postar {
+
+}
+
+/* qdo normal */
+.postar-principal {
+	margin-bottom: 0;
+}
+.postar-icon, .postar-textarea {
+	transition: all 500ms ease-out;
+}
+
+.postar-icon {
+	font-size: 32px;
+}
+
+.postar .postar-textarea {
+	border: 1px solid #fff;
+	border-bottom: 1px solid #ccc;
+	height: 34px;
+}
+
+.postar-action {
+	display: none;
+}
+
+
+.postar-btn-type {
+	margin-top: 10px;
+}
+
+/* qdo ativo */
+.active .postar-principal {
+	margin-bottom: 7px;
+}
+.active .postar-icon {
+	font-size: 60px;
+}
+
+.active .postar-textarea {     min-height: 76px; } .active .postar-action {
+display: block; }
+
+/* FIM POSTAR */

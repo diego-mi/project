@@ -10,6 +10,7 @@ class AuthController extends AbstractActionController
 {
     public function loginAction()
     {
+        $this->layout('layout/login');
         $form = new FormLogin();
         $form->prepareElements();
         if ($this->getRequest()->isPost()) {

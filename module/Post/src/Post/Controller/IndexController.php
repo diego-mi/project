@@ -7,6 +7,9 @@ use Zend\View\Model\ViewModel;
 class IndexController extends AbstractController
 {
 
+    /**
+     *
+     */
     function __construct()
     {
         $this->form = 'Post\Form\PostForm';
@@ -16,18 +19,29 @@ class IndexController extends AbstractController
         $this->entity = 'Post\Entity\VwPost';
     }
 
+    /**
+     * @return ViewModel
+     */
     public function indexAction()
     {
-        $list = $this->getEm()->getRepository($this->entity)->findAll();
-        return new ViewModel(array('list' => $list));
+        $list = $this->getEm()->getRepository($this->entity)->findBy(array(), array('postId' => 'DESC'));
+        $form = $this->getServiceLocator()->get($this->form);
+        return new ViewModel(array('list' => $list, 'form'=> $form));
     }
 
-    public function inserirAction(){
-        $this->form = $this->getServiceLocator()->get($this->form);
+    /**
+     * @return \Zend\Http\Response|ViewModel
+     */
+    public function inserirAction()
+    {
+        //$this->form = $this->getServiceLocator()->get($this->form);
 
         return parent::inserirAction();
     }
 
+    /**
+     * @return ViewModel
+     */
     public function editarAction()
     {
         $this->form = $this->getServiceLocator()->get($this->form);

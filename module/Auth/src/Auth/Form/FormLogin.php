@@ -14,6 +14,7 @@ class FormLogin extends Form
     {
         parent::__construct('login', array());
         $this->setAttribute('method', 'POST');
+        $this->setAttribute('action', '');
 
         $this->add(array(
             'name' => 'login',

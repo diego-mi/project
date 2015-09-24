@@ -54,22 +54,18 @@ abstract class AbstractController extends AbstractActionController
      */
     public function inserirAction()
     {
-        if (is_string($this->form))
-            $form = new $this->form;
-        else
-            $form = $this->form;
 
         $request = $this->getRequest();
 
         if ($request->isPost()){
-
+            $form =
             $form->setData($request->getPost());
 
             if ($form->isValid()){
 
                 $service = $this->getServiceLocator()->get($this->service);
 
-                if ($service->save($request->getPost()->toArray())){
+                if ($service->save($request->getPost()->toArray(), $this->identity()->getId())){
                     $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso!');
                 }else{
                     $this->flashMessenger()->addErrorMessage('Não foi possivel cadastrar! Tente mais tarde.');
@@ -94,7 +90,7 @@ abstract class AbstractController extends AbstractActionController
 
         $this->flashMessenger()->clearMessages();
 
-        return new ViewModel(array('form' => $form));
+        return new ViewModel(array());
     }
 
     /**

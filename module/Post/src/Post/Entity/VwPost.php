@@ -14,6 +14,15 @@ use Base\Entity\AbstractEntity;
  */
 class VwPost extends AbstractEntity
 {
+    protected $arrPrivacity = array(
+        1 => 'fa-pencil',
+        2 => 'fa-pencil',
+    );
+    protected $arrClassification = array(
+        1 => 'fa-pencil',
+        2 => 'fa-pencil',
+    );
+
     /**
      * @var integer
      *
@@ -33,13 +42,6 @@ class VwPost extends AbstractEntity
     /**
      * @var integer
      *
-     * @ORM\Column(name="post_type", type="integer", nullable=false)
-     */
-    private $postType;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="user_id", type="integer", nullable=false)
      */
     private $userId;
@@ -50,6 +52,42 @@ class VwPost extends AbstractEntity
      * @ORM\Column(name="user_name", type="string", length=100, nullable=false)
      */
     private $userName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="post_date", type="string", nullable=true)
+     */
+    private $postDate;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="post_classification", type="integer", nullable=true)
+     */
+    private $postClassification;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="post_privacity", type="integer", nullable=true)
+     */
+    private $postPrivacity;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="post_type_name", type="string", length=50, nullable=false)
+     */
+    private $postTypeName;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="post_type_id", type="integer", nullable=false)
+     */
+    private $postTypeId;
 
     /**
      * @return int
@@ -65,6 +103,7 @@ class VwPost extends AbstractEntity
     public function setPostId($postId)
     {
         $this->postId = $postId;
+
         return $this;
     }
 
@@ -82,23 +121,7 @@ class VwPost extends AbstractEntity
     public function setPostContent($postContent)
     {
         $this->postContent = $postContent;
-        return $this;
-    }
 
-    /**
-     * @return int
-     */
-    public function getPostType()
-    {
-        return $this->postType;
-    }
-
-    /**
-     * @param int $postType
-     */
-    public function setPostType($postType)
-    {
-        $this->postType = $postType;
         return $this;
     }
 
@@ -116,6 +139,7 @@ class VwPost extends AbstractEntity
     public function setUserId($userId)
     {
         $this->userId = $userId;
+
         return $this;
     }
 
@@ -133,7 +157,88 @@ class VwPost extends AbstractEntity
     public function setUserName($userName)
     {
         $this->userName = $userName;
+
         return $this;
+    }
+
+    /**
+     * @return date
+     */
+    public function getPostDate()
+    {
+        return date('d/m - H:i', strtotime($this->postDate));
+    }
+
+    /**
+     * @param date $postDate
+     */
+    public function setPostDate($postDate)
+    {
+        $this->postDate = $postDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostClassification()
+    {
+        return $this->arrClassification[$this->postClassification];
+    }
+
+    /**
+     * @param int $postClassification
+     */
+    public function setPostClassification($postClassification)
+    {
+        $this->postClassification = $postClassification;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostPrivacity()
+    {
+        return $this->arrPrivacity[$this->postPrivacity];
+    }
+
+    /**
+     * @param int $postPrivacity
+     */
+    public function setPostPrivacity($postPrivacity)
+    {
+        $this->postPrivacity = $postPrivacity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostTypeName()
+    {
+        return $this->postTypeName;
+    }
+
+    /**
+     * @param string $postTypeName
+     */
+    public function setPostTypeName($postTypeName)
+    {
+        $this->postTypeName = $postTypeName;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostTypeId()
+    {
+        return $this->postTypeId;
+    }
+
+    /**
+     * @param int $postTypeId
+     */
+    public function setPostTypeId($postTypeId)
+    {
+        $this->postTypeId = $postTypeId;
     }
 
 

@@ -1,7 +1,59 @@
 <div class="col-lg-8 col-md-offset-2">
+
+    <!-- postar -->
+    <form class="social-feed-box clear postar" action="<?php echo($this->url('post') . "/inserir");?>" method="POST">
+        <div class="social-body clearfix">
+
+            <div class="postar-btn-type">
+                <button class="btn btn-primary btn-xs" type="button"><i class="fa fa-pencil"></i>&nbsp;Texto</button>
+                <button class="btn btn-default btn-xs" type="button"><i class="fa fa-picture-o"></i>&nbsp;Foto</button>
+                <button class="btn btn-default btn-xs" type="button"><i class="fa fa-film"></i>&nbsp;Vídeo</button>
+            </div>
+            <div class="form-group postar-principal clearfix">
+                <!-- <label class="control-label col-sm-2"> <i class="fa fa-pencil postar-icon"></i> </label> -->
+                <textarea required name="content" placeholder="poste algo..." class="form-control postar-textarea"></textarea>
+                <input type="hidden" name="type" value="1">
+            </div>
+
+            <div class="form-group postar-privacidade">
+                <label for="inputPassword3" class="col-sm-2 control-label">Privacidade</label>
+                <div class="col-sm-10">
+                    <div class="radio radio-info radio-inline postar-privacidade">
+                        <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="">
+                        <label for="inlineRadio1"> Público </label>
+                    </div>
+                    <div class="radio radio-info radio-inline postar-privacidade">
+                        <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
+                        <label for="inlineRadio2"> Amigos </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group postar-privacidade">
+                <label for="inputPassword3" class="col-sm-2 control-label">Privacidade</label>
+                <div class="col-sm-10">
+                    <div class="radio radio-info radio-inline">
+                        <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="">
+                        <label for="inlineRadio1"> Livre </label>
+                    </div>
+                    <div class="radio radio-info radio-inline">
+                        <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
+                        <label for="inlineRadio2"> 18+ </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="postar-btn-action">
+                <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-pencil"></i>&nbsp;Postar</button>
+                <button id="postarCancelar" class="btn btn-default btn-sm" type="reset"><i class="fa fa-pencil"></i>&nbsp;Cancelar</button>
+            </div>
+        </div>
+    </form>
+    <div class="clearfix"></div>
+    <!-- end postar -->
+
     <!-- posts -->
-    <?php foreach ($this->list as $post) {
-    ?>
+    <?php foreach ($this->list as $post) { ?>
     <!-- social-feed-box -->
     <div class="social-feed-box">
         <!-- social-action -->
@@ -24,17 +76,18 @@
                 <a href="#">
                     <?php echo($post->getUserName()); ?>
                 </a>
-                <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                <span class="badge badge-info float-right"><?php echo($post->getPostTypeName()); ?></span>
+                <i class="hide fa <?php echo($post->getPostClassification()); ?>"></i>
+                <i class="hide fa <?php echo($post->getPostPrivacity()); ?>"></i>
+                <small class="text-muted"><?php echo($post->getPostDate()); ?></small>
             </div>
         </div>
         <!-- end social-avatar -->
+        <div class="clearfix"></div>
         <!-- social-body -->
         <div class="social-body">
             <p>
-                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                in their infancy. Packages and web page editors now use Lorem Ipsum as their
-                default model text.
+                <?php echo($post->getPostContent()); ?>
             </p>
 
             <div class="btn-group">

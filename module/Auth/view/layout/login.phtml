@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Main view</title>
+
+    <!-- css -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/css/main.css')
+        ->prependStylesheet($this->basePath() . '/css/style.css')
+        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+        ->prependStylesheet($this->basePath() . '/font-awesome/css/font-awesome.css') ?>
+
+</head>
+
+<body class="md-skin fixed-nav">
+
+    <?php echo $this->content; ?>
+
+    <!-- Mainly scripts -->
+    <script src="<?php echo($this->basePath() . '/'); ?>js/jquery-2.1.1.js"></script>
+    <script src="<?php echo($this->basePath() . '/'); ?>js/bootstrap.min.js"></script>
+    <script src="<?php echo($this->basePath() . '/'); ?>js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="<?php echo($this->basePath() . '/'); ?>js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="<?php echo($this->basePath() . '/'); ?>js/inspinia.js"></script>
+    <script src="<?php echo($this->basePath() . '/'); ?>js/plugins/pace/pace.min.js"></script>
+
+
+</body>
+
+</html>

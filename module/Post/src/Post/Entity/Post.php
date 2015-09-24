@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Posts
  *
- * @ORM\Table(name="posts", indexes={@ORM\Index(name="posts", columns={"author_id"})})
+ * @ORM\Table(name="posts")
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Post\Entity\PostRepository")
  */
@@ -19,7 +19,7 @@ class Post extends AbstractEntity
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -38,16 +38,32 @@ class Post extends AbstractEntity
     private $type;
 
     /**
-     * @var \Post\Entity\User
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Post\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="author_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="author_id", type="integer", nullable=false)
      */
-    private $author;
+    private $authorId;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date", type="string", nullable=true)
+     */
+    private $date;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="classification", type="string", nullable=true)
+     */
+    private $classification;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="privacity", type="string", nullable=true)
+     */
+    private $privacity;
 
     /**
      * Get id
@@ -58,6 +74,7 @@ class Post extends AbstractEntity
     {
         return $this->id;
     }
+
 
     /**
      * Set content
@@ -110,13 +127,13 @@ class Post extends AbstractEntity
     /**
      * Set author
      *
-     * @param \Post\Entity\User $author
+     * @param integer
      *
      * @return Posts
      */
-    public function setAuthor(\Post\Entity\User $author = null)
+    public function setAuthorId($authorId)
     {
-        $this->author = $author;
+        $this->authorId = $authorId;
 
         return $this;
     }
@@ -124,10 +141,60 @@ class Post extends AbstractEntity
     /**
      * Get author
      *
-     * @return \Post\Entity\User
+     * @return integer
      */
-    public function getAuthor()
+    public function getAuthorId()
     {
-        return $this->author;
+        return $this->authorId;
     }
+
+    /**
+     * @return string
+     */
+    public function getDate()
+    {
+        return date('d/m/Y H:i', strtotime($this->postDate));
+    }
+
+    /**
+     * @param string $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassification()
+    {
+        return $this->classification;
+    }
+
+    /**
+     * @param string $classification
+     */
+    public function setClassification($classification)
+    {
+        $this->classification = $classification;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrivacity()
+    {
+        return $this->privacity;
+    }
+
+    /**
+     * @param string $privacity
+     */
+    public function setPrivacity($privacity)
+    {
+        $this->privacity = $privacity;
+    }
+
+
 }

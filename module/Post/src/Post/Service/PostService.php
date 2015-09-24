@@ -15,12 +15,14 @@ class PostService extends AbstractService
     /**
      * @param array $data
      *
+     * @param int $userId
+     * @param array $data
+     *
      * @return object
      */
-    public function save(Array $data = array())
+    public function save($data, $userId)
     {
-        $data['category'] = $this->em->getRepository('Categoria\Entity\Category')
-                                ->find($data['category']);
+        $data['authorId'] = $userId;
 
         return parent::save($data);
     }

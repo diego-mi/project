@@ -22,5 +22,8 @@ FROM posts
 INNER JOIN user
 ON posts.author_id=user.id;
 
+
+CREATE VIEW Profile AS SELECT user.id as id, user.name as name, user.username as username, user.picture as picture, user.email as email FROM user
+
 INSERT INTO user (name, login, email, password)
 VALUES ('Diego Mi Campos', 'diegomi', 'diegomister@gmail.com', '1234');

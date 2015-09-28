@@ -1,31 +1,31 @@
-<h2>Editar Post</h2>
+<h2>Editar Profile</h2>
 
 <?php
-    /**
-     * @var $form \Zend\Form\Form
-     */
-    $form = $this->form;
+/**
+ * @var $form \Zend\Form\Form
+ */
+$form = $this->form;
 
-    if ($this->success)
-        echo '<div class="alert alert-success">'.$this->success[0].'<button type="button" class="close" data-dismiss="alert">×</button></div>';
+if ($this->success)
+    echo '<div class="alert alert-success">'.$this->success[0].'<button type="button" class="close" data-dismiss="alert">×</button></div>';
 
-    if ($this->error)
-        echo '<div class="alert alert-warning">'.$this->error[0].'<button type="button" class="close" data-dismiss="alert">×</button></div>';
+if ($this->error)
+    echo '<div class="alert alert-warning">'.$this->error[0].'<button type="button" class="close" data-dismiss="alert">×</button></div>';
 
-    $this->formElementErrors()
-        ->setMessageOpenFormat ('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>')
-        ->setMessageCloseString ('</div>')
-        ->render ($form);
+$this->formElementErrors()
+    ->setMessageOpenFormat ('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>')
+    ->setMessageCloseString ('</div>')
+    ->render ($form);
 
-    $form->setAttribute('action', $this->url('post/default', array('controller' => 'post', 'action' => 'editar', 'id' => $this->id)));
+$form->setAttribute('action', $this->url('profile-editar'));
 
-    $form->prepare();
+$form->prepare();
 
-    echo $this->form()->openTag($form);
+echo $this->form()->openTag($form);
 
-    echo $this->formCollection($form);
+echo $this->formCollection($form);
 
-    echo $this->form()->closeTag();
+echo $this->form()->closeTag();
 ?>
 
 <style type="text/css">

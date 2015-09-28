@@ -20,7 +20,7 @@ class PostService extends AbstractService
      *
      * @return object
      */
-    public function save($data)
+    public function save($data, $userId)
     {
         $data['authorId'] = $userId;
 
@@ -38,11 +38,10 @@ class PostService extends AbstractService
     public function insert($data, $userId)
     {
         $data['authorId'] = $userId;
-        if ((isset($data['picture'])) && (isset($data['picture']['tmp_name'])) && (!empty($data['picture']['tmp_name']))) {
+        if (count($data['picture'])) {
             $data['picture'] = $this->getNewNameFileUpload($data['picture']['tmp_name']);
-        } else {
-            unset($data['picture']);
         }
+
         return parent::save($data);
     }
 

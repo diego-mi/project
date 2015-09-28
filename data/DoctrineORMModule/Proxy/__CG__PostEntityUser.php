@@ -64,10 +64,10 @@ class User extends \Post\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'id', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'name', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'login', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'email', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'password');
+            return array('__isInitialized__', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'id', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'name', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'username', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'email', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'password');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'id', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'name', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'login', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'email', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'password');
+        return array('__isInitialized__', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'id', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'name', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'username', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'email', '' . "\0" . 'Post\\Entity\\User' . "\0" . 'password');
     }
 
     /**
@@ -213,23 +213,23 @@ class User extends \Post\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setLogin($login)
+    public function setUsername($username)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLogin', array($login));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsername', array($username));
 
-        return parent::setLogin($login);
+        return parent::setUsername($username);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getLogin()
+    public function getUsername()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLogin', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsername', array());
 
-        return parent::getLogin();
+        return parent::getUsername();
     }
 
     /**

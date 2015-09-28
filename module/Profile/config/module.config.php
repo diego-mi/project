@@ -13,22 +13,16 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '[/:action[/:id]]',
-                            'constraints' => array(
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id'         => '\d+'
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
+            ),
+            'profile-editar' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/profile/editar',
+                    'defaults' => array(
+                        'controller' => 'Profile\Controller\Index',
+                        'action'     => 'editar',
                     ),
                 ),
-
             ),
         ),
     ),

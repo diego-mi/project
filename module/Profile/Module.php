@@ -1,8 +1,8 @@
 <?php
 namespace Profile;
 
-use Post\Service\ProfileService;
-use Post\Form\ProfileForm;
+use Profile\Service\ProfileService;
+use Profile\Form\ProfileForm;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 

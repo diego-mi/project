@@ -8,7 +8,7 @@ class ProfileService extends AbstractService
 {
     public function __construct(EntityManager $em)
     {
-        $this->entity = 'Profile\Entity\Profile';
+        $this->entity = 'Post\Entity\User';
         parent::__construct($em);
     }
 
@@ -20,7 +20,7 @@ class ProfileService extends AbstractService
      *
      * @return object
      */
-    public function save($data)
+    public function save($data, $userId)
     {
         return parent::save($data);
     }

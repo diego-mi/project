@@ -50,6 +50,7 @@ class IndexController extends AbstractController
                 $service = $this->getServiceLocator()->get($this->service);
                 if ($service->insert($form->getData(), $this->identity()->getId())) {
                     $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso!');
+
                     return $this->redirect()
                         ->toRoute($this->route, array('controller' => $this->controller, 'action' => 'index'));
                 } else {
@@ -77,8 +78,19 @@ class IndexController extends AbstractController
         }
 
         $this->flashMessenger()->clearMessages();
+
         return new ViewModel(array('form' => $form));
     }
+
+
+    public function viewAction()
+    {
+        $list = $this->getEm()->getRepository($this->entity)->find(array(), array('postId' => 'DESC'));
+        $this->form = $this->getServiceLocator()->get($this->form);
+
+        return new ViewModel(array('list' => $list, 'form' => $this->form));
+    }
+
 
     /**
      * @return ViewModel

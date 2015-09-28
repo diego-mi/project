@@ -14,10 +14,9 @@ abstract class AbstractService
         $this->em = $em;
     }
 
-    public function save(Array $data = array())
+    public function save($data)
     {
-        if (isset($data['id'])){
-
+        if ((isset($data['id'])) && (!empty($data['id']))) {
             $entity = $this->em->getReference($this->entity, $data['id']);
 
             $hydrator = new ClassMethods();

@@ -3,7 +3,6 @@ namespace Base\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
 use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter\ArrayAdapter;
 
@@ -33,16 +32,20 @@ abstract class AbstractController extends AbstractActionController
         $paginator->setCurrentPageNumber($page)
             ->setDefaultItemCountPerPage(10);
 
-        if ($this->flashMessenger()->hasSuccessMessages()){
+        if ($this->flashMessenger()->hasSuccessMessages()) {
             return new ViewModel(array(
-                'data' => $paginator, 'page' => $page,
-                'success' => $this->flashMessenger()->getSuccessMessages()));
+                'data' => $paginator,
+                'page' => $page,
+                'success' => $this->flashMessenger()->getSuccessMessages()
+            ));
         }
 
-        if ($this->flashMessenger()->hasErrorMessages()){
+        if ($this->flashMessenger()->hasErrorMessages()) {
             return new ViewModel(array(
-                'data' => $paginator, 'page' => $page,
-                'error' => $this->flashMessenger()->getErrorMessages()));
+                'data' => $paginator,
+                'page' => $page,
+                'error' => $this->flashMessenger()->getErrorMessages()
+            ));
         }
 
 
@@ -54,43 +57,49 @@ abstract class AbstractController extends AbstractActionController
      */
     public function inserirAction()
     {
+        $form = $this->form;
 
         $request = $this->getRequest();
 
-        if ($request->isPost()){
-            $form =
-            $form->setData($request->getPost());
+        if ($request->isPost()) {
+            $form->setData(
+                array_merge_recursive(
+                    $request->getPost()->toArray(),
+                    $request->getFiles()->toArray()
+                )
+            );
 
-            if ($form->isValid()){
-
+            if ($form->isValid()) {
                 $service = $this->getServiceLocator()->get($this->service);
 
-                if ($service->save($request->getPost()->toArray(), $this->identity()->getId())){
+                if ($service->save($form->getData(), $this->identity()->getId())) {
                     $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso!');
-                }else{
+                } else {
                     $this->flashMessenger()->addErrorMessage('Não foi possivel cadastrar! Tente mais tarde.');
                 }
 
                 return $this->redirect()
-                        ->toRoute($this->route, array('controller' => $this->controller, 'action' => 'inserir'));
+                  ->toRoute($this->route, array('controller' => $this->controller, 'action' => 'inserir'));
             }
         }
 
-        if ($this->flashMessenger()->hasSuccessMessages()){
+        if ($this->flashMessenger()->hasSuccessMessages()) {
             return new ViewModel(array(
                 'form' => $form,
-                'success' => $this->flashMessenger()->getSuccessMessages()));
+                'success' => $this->flashMessenger()->getSuccessMessages()
+            ));
         }
 
-        if ($this->flashMessenger()->hasErrorMessages()){
+        if ($this->flashMessenger()->hasErrorMessages()) {
             return new ViewModel(array(
                 'form' => $form,
-                'error' => $this->flashMessenger()->getErrorMessages()));
+                'error' => $this->flashMessenger()->getErrorMessages()
+            ));
         }
 
         $this->flashMessenger()->clearMessages();
-
-        return new ViewModel(array());
+        $a = 'a';
+        return new ViewModel(array('form' => $form, 'a' => $a));
     }
 
     /**
@@ -98,59 +107,65 @@ abstract class AbstractController extends AbstractActionController
      */
     public function editarAction()
     {
-        if (is_string($this->form))
+        if (is_string($this->form)) {
             $form = new $this->form;
-        else
+        } else {
             $form = $this->form;
+        }
 
         $request = $this->getRequest();
         $param = $this->params()->fromRoute('id', 0);
 
         $repository = $this->getEm()->getRepository($this->entity)->find($param);
 
-        if ($repository){
+        if ($repository) {
 
             $array = array();
-            foreach($repository->toArray() as $key => $value){
-                if ($value instanceof \DateTime)
+            foreach ($repository->toArray() as $key => $value) {
+                if ($value instanceof \DateTime) {
                     $array[$key] = $value->format('d/m/Y');
-                else
+                } else {
                     $array[$key] = $value;
+                }
             }
 
             $form->setData($array);
 
-            if ($request->isPost()){
+            if ($request->isPost()) {
 
                 $form->setData($request->getPost());
 
-                if ($form->isValid()){
+                if ($form->isValid()) {
 
                     $service = $this->getServiceLocator()->get($this->service);
 
                     $data = $request->getPost()->toArray();
-                    $data['id'] = (int) $param;
+                    $data['id'] = (int)$param;
 
-                    if ($service->save($data)){
+                    if ($service->save($data)) {
                         $this->flashMessenger()->addSuccessMessage('Atualizado com sucesso!');
-                    }else{
+                    } else {
                         $this->flashMessenger()->addErrorMessage('Não foi possivel atualizar! Tente mais tarde.');
                     }
 
                     return $this->redirect()
                         ->toRoute($this->route,
-                            array('controller' => $this->controller,
-                                  'action' => 'editar', 'id' => $param));
+                            array(
+                                'controller' => $this->controller,
+                                'action' => 'editar',
+                                'id' => $param
+                            ));
                 }
 
             }
 
-        }else{
+        } else {
             $this->flashMessenger()->addInfoMessage('Registro não foi encontrado!');
+
             return $this->redirect()->toRoute($this->route, array('controller' => $this->controller));
         }
 
-        if ($this->flashMessenger()->hasSuccessMessages()){
+        if ($this->flashMessenger()->hasSuccessMessages()) {
             return new ViewModel(array(
                 'form' => $form,
                 'success' => $this->flashMessenger()->getSuccessMessages(),
@@ -158,7 +173,7 @@ abstract class AbstractController extends AbstractActionController
             ));
         }
 
-        if ($this->flashMessenger()->hasErrorMessages()){
+        if ($this->flashMessenger()->hasErrorMessages()) {
             return new ViewModel(array(
                 'form' => $form,
                 'error' => $this->flashMessenger()->getErrorMessages(),
@@ -166,7 +181,7 @@ abstract class AbstractController extends AbstractActionController
             ));
         }
 
-        if ($this->flashMessenger()->hasInfoMessages()){
+        if ($this->flashMessenger()->hasInfoMessages()) {
             return new ViewModel(array(
                 'form' => $form,
                 'warning' => $this->flashMessenger()->getInfoMessages(),
@@ -189,10 +204,11 @@ abstract class AbstractController extends AbstractActionController
         $service = $this->getServiceLocator()->get($this->service);
         $id = $this->params()->fromRoute('id', 0);
 
-        if ($service->remove(array('id' => $id)))
+        if ($service->remove(array('id' => $id))) {
             $this->flashMessenger()->addSuccessMessage('Resistro deletado com sucesso!');
-        else
+        } else {
             $this->flashMessenger()->addErrorMessage('Não foi possivel deletar o registro!');
+        }
 
         return $this->redirect()->toRoute($this->route, array('controller' => $this->controller));
     }
@@ -202,7 +218,7 @@ abstract class AbstractController extends AbstractActionController
      */
     public function getEm()
     {
-        if ($this->em == null){
+        if ($this->em == null) {
             $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         }
 

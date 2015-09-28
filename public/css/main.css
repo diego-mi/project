@@ -39,7 +39,9 @@
     float: right;
     margin-left: 10px;
 }
-
+.postar-foto {
+    display: none;
+}
 /* qdo ativo */
 .active .postar-principal {
 	margin-bottom: 7px;

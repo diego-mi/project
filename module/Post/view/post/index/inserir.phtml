@@ -1,51 +1,61 @@
 <?php
 
+$form = $this->form;
 if ($this->success) {
     echo '<div class="alert alert-success">' . $this->success[0] . '<button type="button" class="close" data-dismiss="alert">×</button></div>';
 }
-
 if ($this->error) {
     echo '<div class="alert alert-warning">' . $this->error[0] . '<button type="button" class="close" data-dismiss="alert">×</button></div>';
 }
 
-?>
+$this->formElementErrors()
+    ->setMessageOpenFormat(
+        '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>'
+    )
+    ->setMessageCloseString('</div>')
+    ->render($form);
 
+$form->setAttribute('action', $this->url('post/default', array('controller' => 'post', 'action' => 'inserir')));
+$form->setAttribute('class', 'social-feed-box clear postar active');
+$form->prepare();
+
+?>
 <!-- postar -->
 <div class="col-md-8 col-md-offset-2">
-    <form
-        class="social-feed-box clear postar active"
-        action="<?php echo($this->url('post') . "/inserir");?>"
-        method="POST" enctype="multipart/form-data">
+
+    <?php echo $this->form()->openTag($form); ?>
 
         <div class="social-body clearfix">
 
             <input id="post-type" type="hidden" name="type" value="1">
 
-            <div class="postar-btn-type">
-                <button id="btn-postar-texto" class="btn btn-primary btn-xs" type="button">
+            <div class="postar-div-btn-type">
+                <button id="btn-postar-texto" class="postar-btn-type btn btn-primary btn-xs" type="button">
                     <i class="fa fa-pencil"></i>&nbsp;Texto
                 </button>
-                <button id="btn-postar-foto" class="btn btn-default btn-xs" type="button">
+                <button id="btn-postar-foto" class="postar-btn-type btn btn-default btn-xs" type="button">
                     <i class="fa fa-picture-o"></i>&nbsp;Foto
-                </button>
-                <button class="btn btn-default btn-xs" type="button">
-                    <i class="fa fa-film"></i>&nbsp;Vídeo
                 </button>
             </div>
             <div class="form-group postar-principal clearfix">
-                <!-- <label class="control-label col-sm-2"> <i class="fa fa-pencil postar-icon"></i> </label> -->
-                <textarea
-                    required
-                    name="content"
-                    placeholder="poste algo..."
-                    class="form-control postar-textarea"></textarea>
+                <?php
+                $content = $form->get('content');
+                $content->setAttribute('class', 'form-control postar-textarea');
+                $content->setAttribute('placeholder', 'Crie uma nova postagem...');
+                echo $this->formRow($content);
+                ?>
             </div>
 
             <div class="row postar-itens-tipo postar-foto">
                 <div class="form-group clearfix">
                     <label class="control-label col-sm-2">Foto:</label>
                     <div class="col-sm-10">
-                        <input type="file" name="picture" id="post-foto"/>
+                        <?php
+                        $picture = $form->get('picture');
+                        $picture->setAttribute('class', 'postar-picture');
+                        $picture->setAttribute('placeholder', 'Upload de imagem');
+                        echo $this->formRow($picture);
+                        ?>
                     </div>
                 </div>
             </div>
@@ -65,12 +75,12 @@ if ($this->error) {
                         <label for="inputPassword3" class="col-sm-2 control-label">Privacidade</label>
                         <div class="col-sm-10">
                             <div class="radio radio-info radio-inline">
-                                <input type="radio" id="privacidade1" value="option1" name="radioInline" checked="">
+                                <input type="radio" id="privacidade1" value="1" name="privacity" checked="">
                                 <label for="privacidade1"> Público </label>
                             </div>
                             <div class="radio radio-info radio-inline">
-                                <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
-                                <label for="inlineRadio2"> Amigos </label>
+                                <input type="radio" id="privacidade2" value="2" name="privacity">
+                                <label for="privacidade2"> Amigos </label>
                             </div>
                         </div>
                     </div>
@@ -79,12 +89,12 @@ if ($this->error) {
                         <label for="inputPassword3" class="col-sm-2 control-label">Classificação</label>
                         <div class="col-sm-10">
                             <div class="radio radio-info radio-inline">
-                                <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="">
-                                <label for="inlineRadio1"> Livre </label>
+                                <input type="radio" id="classification1" value="option1" name="classification" checked="">
+                                <label for="classification1"> Livre </label>
                             </div>
                             <div class="radio radio-info radio-inline">
-                                <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
-                                <label for="inlineRadio2"> 18+ </label>
+                                <input type="radio" id="classification2" value="option2" name="classification">
+                                <label for="classification2"> 18+ </label>
                             </div>
                         </div>
                     </div>
@@ -105,10 +115,4 @@ if ($this->error) {
 </div>
 <div class="clearfix"></div>
 <!-- end postar -->
-
-<style type="text/css">
-    input, textarea, label, select {
-        display: block;
-    }
-</style>
 

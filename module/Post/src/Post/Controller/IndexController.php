@@ -25,8 +25,9 @@ class IndexController extends AbstractController
     public function indexAction()
     {
         $list = $this->getEm()->getRepository($this->entity)->findBy(array(), array('postId' => 'DESC'));
-        $form = $this->getServiceLocator()->get($this->form);
-        return new ViewModel(array('list' => $list, 'form'=> $form));
+        $this->form = $this->getServiceLocator()->get($this->form);
+
+        return new ViewModel(array('list' => $list, 'form' => $this->form));
     }
 
     /**
@@ -34,9 +35,46 @@ class IndexController extends AbstractController
      */
     public function inserirAction()
     {
-        //$this->form = $this->getServiceLocator()->get($this->form);
+        $this->form = $this->getServiceLocator()->get($this->form);
+        $form = $this->form;
+        $request = $this->getRequest();
 
-        return parent::inserirAction();
+        if ($request->isPost()) {
+            $form->setData(
+                array_merge_recursive(
+                    $request->getPost()->toArray(),
+                    $request->getFiles()->toArray()
+                )
+            );
+
+            if ($form->isValid()) {
+                $service = $this->getServiceLocator()->get($this->service);
+                if ($service->insert($form->getData(), $this->identity()->getId())) {
+                    $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso!');
+                } else {
+                    $this->flashMessenger()->addErrorMessage('Não foi possivel cadastrar! Tente mais tarde.');
+                }
+                //return $this->redirect()
+                //    ->toRoute($this->route, array('controller' => $this->controller, 'action' => 'inserir'));
+            }
+        }
+
+        if ($this->flashMessenger()->hasSuccessMessages()) {
+            return new ViewModel(array(
+                'form' => $form,
+                'success' => $this->flashMessenger()->getSuccessMessages()
+            ));
+        }
+
+        if ($this->flashMessenger()->hasErrorMessages()) {
+            return new ViewModel(array(
+                'form' => $form,
+                'error' => $this->flashMessenger()->getErrorMessages()
+            ));
+        }
+
+        $this->flashMessenger()->clearMessages();
+        return new ViewModel(array('form' => $form));
     }
 
     /**

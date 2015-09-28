@@ -27,5 +27,31 @@ class PostService extends AbstractService
         return parent::save($data);
     }
 
+    /**
+     * @param array $data
+     *
+     * @param int $userId
+     * @param array $data
+     *
+     * @return object
+     */
+    public function insert($data, $userId)
+    {
+        $data['authorId'] = $userId;
+        if (count($data['picture'])) {
+            $data['picture'] = $this->getNewNameFileUpload($data['picture']['tmp_name']);
+        }
+
+        return parent::save($data);
+    }
+
+    /**
+     * @param string $tmpName Nome temporario do arquivo que foi upado
+     */
+    protected function getNewNameFileUpload($tmpName)
+    {
+        $tmpNameFull = explode("_", $tmpName);
+        return $tmpNameFull[1];
+    }
 
 }

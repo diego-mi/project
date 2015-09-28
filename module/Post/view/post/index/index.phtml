@@ -1,156 +1,124 @@
+<?php
+echo($this->partial('post/index/inserir-partial', array()));
+?>
 <div class="col-lg-8 col-md-offset-2">
 
-    <!-- postar -->
-    <form class="social-feed-box clear postar" action="<?php echo($this->url('post') . "/inserir");?>" method="POST">
-        <div class="social-body clearfix">
-
-            <div class="postar-btn-type">
-                <button class="btn btn-primary btn-xs" type="button"><i class="fa fa-pencil"></i>&nbsp;Texto</button>
-                <button class="btn btn-default btn-xs" type="button"><i class="fa fa-picture-o"></i>&nbsp;Foto</button>
-                <button class="btn btn-default btn-xs" type="button"><i class="fa fa-film"></i>&nbsp;Vídeo</button>
-            </div>
-            <div class="form-group postar-principal clearfix">
-                <!-- <label class="control-label col-sm-2"> <i class="fa fa-pencil postar-icon"></i> </label> -->
-                <textarea required name="content" placeholder="poste algo..." class="form-control postar-textarea"></textarea>
-                <input type="hidden" name="type" value="1">
-            </div>
-
-            <div class="form-group postar-privacidade">
-                <label for="inputPassword3" class="col-sm-2 control-label">Privacidade</label>
-                <div class="col-sm-10">
-                    <div class="radio radio-info radio-inline postar-privacidade">
-                        <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="">
-                        <label for="inlineRadio1"> Público </label>
-                    </div>
-                    <div class="radio radio-info radio-inline postar-privacidade">
-                        <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
-                        <label for="inlineRadio2"> Amigos </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group postar-privacidade">
-                <label for="inputPassword3" class="col-sm-2 control-label">Privacidade</label>
-                <div class="col-sm-10">
-                    <div class="radio radio-info radio-inline">
-                        <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="">
-                        <label for="inlineRadio1"> Livre </label>
-                    </div>
-                    <div class="radio radio-info radio-inline">
-                        <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
-                        <label for="inlineRadio2"> 18+ </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="postar-btn-action">
-                <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-pencil"></i>&nbsp;Postar</button>
-                <button id="postarCancelar" class="btn btn-default btn-sm" type="reset"><i class="fa fa-pencil"></i>&nbsp;Cancelar</button>
-            </div>
-        </div>
-    </form>
-    <div class="clearfix"></div>
-    <!-- end postar -->
+    <?php
+    if ((isset($this->list)) && (!count($this->list))) {
+        echo(
+        '<div class="well">
+            <p class="text-center">Ainda não existem posts para ver, comece postando um...</p>
+        </div>'
+        );
+    }
+    ?>
 
     <!-- posts -->
     <?php foreach ($this->list as $post) { ?>
-    <!-- social-feed-box -->
-    <div class="social-feed-box">
-        <!-- social-action -->
-        <div class="pull-right social-action dropdown">
-            <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu m-t-xs">
-                <li><a href="#">Config</a></li>
-            </ul>
-        </div>
-        <!-- end social-action -->
-        <!-- social-avatar -->
-        <div class="social-avatar">
-            <a href="" class="pull-left">
-                <img alt="image" src="img/a1.jpg">
-            </a>
-
-            <div class="media-body">
-                <a href="#">
-                    <?php echo($post->getUserName()); ?>
-                </a>
-                <span class="badge badge-info float-right"><?php echo($post->getPostTypeName()); ?></span>
-                <i class="hide fa <?php echo($post->getPostClassification()); ?>"></i>
-                <i class="hide fa <?php echo($post->getPostPrivacity()); ?>"></i>
-                <small class="text-muted"><?php echo($post->getPostDate()); ?></small>
+        <!-- social-feed-box -->
+        <div class="social-feed-box">
+            <!-- social-action -->
+            <div class="pull-right social-action dropdown">
+                <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu m-t-xs">
+                    <li><a href="#">Config</a></li>
+                </ul>
             </div>
-        </div>
-        <!-- end social-avatar -->
-        <div class="clearfix"></div>
-        <!-- social-body -->
-        <div class="social-body">
-            <p>
-                <?php echo($post->getPostContent()); ?>
-            </p>
-
-            <div class="btn-group">
-                <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
-                <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
-                <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
-            </div>
-        </div>
-        <!-- end social-body -->
-        <!-- social-footer -->
-        <div class="social-footer">
-            <!-- social-comment -->
-            <div class="social-comment">
+            <!-- end social-action -->
+            <!-- social-avatar -->
+            <div class="social-avatar">
                 <a href="" class="pull-left">
                     <img alt="image" src="img/a1.jpg">
                 </a>
 
                 <div class="media-body">
                     <a href="#">
-                        Andrew Williams
+                        <?php echo($post->getUserName()); ?>
                     </a>
-                    Internet tend to repeat predefined chunks as necessary, making this the first true generator on the
-                    Internet. It uses a dictionary of over 200 Latin words.
-                    <br>
-                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
-                    <small class="text-muted">12.06.2014</small>
+                    <span class="badge badge-info float-right"><?php echo($post->getPostTypeName()); ?></span>
+                    <i class="hide fa <?php echo($post->getPostClassification()); ?>"></i>
+                    <i class="hide fa <?php echo($post->getPostPrivacity()); ?>"></i>
+                    <small class="text-muted"><?php echo($post->getPostDate()); ?></small>
                 </div>
             </div>
-            <!-- end social-comment -->
-            <!-- social-comment -->
-            <div class="social-comment">
-                <a href="" class="pull-left">
-                    <img alt="image" src="img/a2.jpg">
-                </a>
-
-                <div class="media-body">
-                    <a href="#">
-                        Andrew Williams
+            <!-- end social-avatar -->
+            <div class="clearfix"></div>
+            <!-- social-body -->
+            <div class="social-body">
+                <p>
+                    <?php echo($post->getPostContent()); ?>
+                </p>
+                <?php
+                $img = $post->getPostPicture();
+                if ($img) {
+                    echo('<img src="' . $this->basePath() . '/upload/posts/img_' . $img . '" class="img-responsive">');
+                }
+                ?>
+                <div class="btn-group">
+                    <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                    <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                    <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                </div>
+            </div>
+            <!-- end social-body -->
+            <!-- social-footer -->
+            <div class="social-footer">
+                <!-- social-comment -->
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="img/a1.jpg">
                     </a>
-                    Making this the first true generator on the Internet. It uses a dictionary of.
-                    <br>
-                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
-                    <small class="text-muted">10.07.2014</small>
-                </div>
-            </div>
-            <!-- end social-comment -->
-            <!-- social-comment -->
-            <div class="social-comment">
-                <a href="" class="pull-left">
-                    <img alt="image" src="img/a3.jpg">
-                </a>
 
-                <div class="media-body">
-                    <textarea class="form-control" placeholder="Write comment..."></textarea>
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Internet tend to repeat predefined chunks as necessary, making this the first true generator on
+                        the
+                        Internet. It uses a dictionary of over 200 Latin words.
+                        <br>
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                        <small class="text-muted">12.06.2014</small>
+                    </div>
                 </div>
+                <!-- end social-comment -->
+                <!-- social-comment -->
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="img/a2.jpg">
+                    </a>
+
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Making this the first true generator on the Internet. It uses a dictionary of.
+                        <br>
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                        <small class="text-muted">10.07.2014</small>
+                    </div>
+                </div>
+                <!-- end social-comment -->
+                <!-- social-comment -->
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="img/a3.jpg">
+                    </a>
+
+                    <div class="media-body">
+                        <textarea class="form-control" placeholder="Write comment..."></textarea>
+                    </div>
+                </div>
+                <!-- end social-comment -->
             </div>
-            <!-- end social-comment -->
+            <!-- end social-footer -->
         </div>
-        <!-- end social-footer -->
-    </div>
-    <!--end social-feed-box -->
-<?php
-}
-?>
+        <!--end social-feed-box -->
+    <?php
+    }
+    ?>
 </div>
 <!-- end col-lg-8 col-md-offset-2 -->
+<script src="<?php echo($this->basePath() . '/'); ?>js/feed.js"></script>

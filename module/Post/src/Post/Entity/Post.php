@@ -66,6 +66,14 @@ class Post extends AbstractEntity
     private $privacity;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="picture", type="string", nullable=true)
+     */
+    private $picture;
+
+
+    /**
      * Get id
      *
      * @return integer
@@ -196,5 +204,19 @@ class Post extends AbstractEntity
         $this->privacity = $privacity;
     }
 
+    /**
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
 
+    /**
+     * @param string $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+    }
 }

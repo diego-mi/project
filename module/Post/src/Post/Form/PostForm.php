@@ -2,11 +2,10 @@
 namespace Post\Form;
 
 use Zend\Form\Form;
-use Post\Form\PostForm;
+use Post\Form\PostFilter;
 
 class PostForm extends Form
 {
-    protected $objectManager;
 
     public function __construct()
     {
@@ -14,7 +13,6 @@ class PostForm extends Form
         parent::__construct(null);
         $this->setAttribute('method', 'POST');
         $this->setAttribute('class', 'form-horizontal');
-        $this->setAttribute('enctype', 'multipart/form-data');
         $this->setInputFilter(new PostFilter());
 
         $this->add(array(
@@ -31,49 +29,40 @@ class PostForm extends Form
             ),
         ));
 
-        $this->add(array(
-            'name' => 'authorId',
-            'type' => 'Hidden',
-            'attributes' => array(
-                'value' => '1',
-            ),
-        ));
 
         $this->add(array(
             'name' => 'content',
-            'type' => 'Text',
-            'options' => array(
-                'label' => 'Content',
-            ),
+            'type' => 'textarea',
         ));
 
         $this->add(array(
+            'type' => 'Zend\Form\Element\Radio',
             'name' => 'classification',
-            'type' => 'Text',
             'options' => array(
                 'label' => 'Classification',
+                'value_options' => array(
+                    '1' => 'Free',
+                    '2' => 'Adult',
+                ),
             ),
         ));
 
         $this->add(array(
+            'type' => 'Zend\Form\Element\Radio',
             'name' => 'privacity',
-            'type' => 'Text',
             'options' => array(
                 'label' => 'Privacity',
+                'value_options' => array(
+                    '1' => 'Public',
+                    '2' => 'Friends',
+                ),
             ),
         ));
 
         $this->add(array(
-            'name' => 'privacity',
-            'type' => 'Text',
-            'options' => array(
-                'label' => 'Privacity',
-            ),
+            'name' => 'picture',
+            'type' => 'file',
         ));
-
-        $arquivo = new File('arquivo');
-        $arquivo->setLabel('Foto');
-        $this->add($arquivo);
 
         $this->add(array(
             'name' => 'submit',
@@ -83,9 +72,5 @@ class PostForm extends Form
                 'id' => 'submitbutton',
             ),
         ));
-
-
-
     }
-
 }

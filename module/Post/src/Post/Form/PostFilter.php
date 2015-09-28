@@ -1,9 +1,7 @@
 <?php
 namespace Post\Form;
 
-use Zend\InputFilter\FileInput;
 use Zend\InputFilter\InputFilter;
-use Zend\Validator\File\MimeType;
 
 class PostFilter extends InputFilter
 {
@@ -24,13 +22,6 @@ class PostFilter extends InputFilter
                 array('name' => 'Int'),
             ),
         ));
-        $this->add(array(
-            'name' => 'author_id',
-            'required' => true,
-            'filters' => array(
-                array('name' => 'Int'),
-            ),
-        ));
 
         $this->add(array(
             'name' => 'content',
@@ -38,41 +29,30 @@ class PostFilter extends InputFilter
             'filters' => array(
                 array('name' => 'StripTags'),
             ),
-            'validators' => array(
-                array(
-                    'name' => 'StringLength',
-                    'options' => array(
-                        'encoding' => 'UTF-8',
-                        'min' => 1,
-                        'max' => 100,
-                    ),
-                ),
-            ),
         ));
 
-        $arquivo = new FileInput('picture');
-        $arquivo->setRequired(true);
-        $arquivo->getFilterChain()->attach(
-            array(
-                'target' => '.data/blog_',
-                'use_upload_extension' => true,
-                'randomize' => true,
-            )
-        );
 
-        $arquivo->getValidatorChain()->attach(
+        $this->add(
             array(
-                'max' => substr(ini_get('upload_max_filesize'), 0, -1) . 'MB'
-            )
-        );
-
-        $arquivo->getValidatorChain()->attach(
-            new MimeType(
-                array(
-                    'image/gif',
-                    'image/jpeg',
-                    'image/png',
-                    'enableheaderCheck' => true
+                'name' => 'picture',
+                'required' => false,
+                'validators' => array(
+                    array(
+                        'name' => 'Zend\Validator\File\MimeType',
+                        'options' => array(
+                            'mimeType' => 'image'
+                        )
+                    )
+                ),
+                'filters' => array(
+                    array(
+                        'name' => 'Zend\Filter\File\RenameUpload',
+                        'options' => array(
+                            'target' => './public/upload/posts/img',
+                            'randomize' => true,
+                            'use_upload_extension' => true
+                        )
+                    )
                 )
             )
         );

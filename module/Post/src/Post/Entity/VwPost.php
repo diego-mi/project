@@ -90,6 +90,13 @@ class VwPost extends AbstractEntity
     private $postTypeId;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="post_picture", type="string", nullable=true)
+     */
+    private $postPicture;
+
+    /**
      * @return int
      */
     public function getPostId()
@@ -241,5 +248,19 @@ class VwPost extends AbstractEntity
         $this->postTypeId = $postTypeId;
     }
 
+    /**
+     * @return string
+     */
+    public function getPostPicture()
+    {
+        return $this->postPicture;
+    }
 
+    /**
+     * @param string $postPicture
+     */
+    public function setPostPicture($postPicture)
+    {
+        $this->postPicture = $postPicture;
+    }
 }

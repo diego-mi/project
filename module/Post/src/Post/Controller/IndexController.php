@@ -46,16 +46,19 @@ class IndexController extends AbstractController
                     $request->getFiles()->toArray()
                 )
             );
-
             if ($form->isValid()) {
                 $service = $this->getServiceLocator()->get($this->service);
                 if ($service->insert($form->getData(), $this->identity()->getId())) {
                     $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso!');
+                    return $this->redirect()
+                        ->toRoute($this->route, array('controller' => $this->controller, 'action' => 'index'));
                 } else {
                     $this->flashMessenger()->addErrorMessage('Não foi possivel cadastrar! Tente mais tarde.');
                 }
                 //return $this->redirect()
                 //    ->toRoute($this->route, array('controller' => $this->controller, 'action' => 'inserir'));
+            } else {
+                $this->flashMessenger()->addErrorMessage('Form inválido.');
             }
         }
 

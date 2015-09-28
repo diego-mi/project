@@ -10,11 +10,12 @@ class PostFilter extends InputFilter
     {
         $this->add(array(
             'name' => 'id',
-            'required' => true,
+            'required' => false,
             'filters' => array(
                 array('name' => 'Int'),
             ),
         ));
+
         $this->add(array(
             'name' => 'type',
             'required' => true,

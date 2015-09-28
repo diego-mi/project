@@ -53,6 +53,7 @@ $form->prepare();
                         <?php
                         $picture = $form->get('picture');
                         $picture->setAttribute('class', 'postar-picture');
+                        $picture->setAttribute('id', 'postar-foto');
                         $picture->setAttribute('placeholder', 'Upload de imagem');
                         echo $this->formRow($picture);
                         ?>
@@ -89,11 +90,11 @@ $form->prepare();
                         <label for="inputPassword3" class="col-sm-2 control-label">Classificação</label>
                         <div class="col-sm-10">
                             <div class="radio radio-info radio-inline">
-                                <input type="radio" id="classification1" value="option1" name="classification" checked="">
+                                <input type="radio" id="classification1" value="1" name="classification" checked="">
                                 <label for="classification1"> Livre </label>
                             </div>
                             <div class="radio radio-info radio-inline">
-                                <input type="radio" id="classification2" value="option2" name="classification">
+                                <input type="radio" id="classification2" value="2" name="classification">
                                 <label for="classification2"> 18+ </label>
                             </div>
                         </div>

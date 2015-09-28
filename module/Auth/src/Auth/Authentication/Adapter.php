@@ -10,7 +10,7 @@ use Zend\Authentication\Result;
 class Adapter implements AdapterInterface
 {
     protected $em;
-    protected $login;
+    protected $username;
     protected $password;
     /**
      * @param EntityManager $em
@@ -29,16 +29,16 @@ class Adapter implements AdapterInterface
     /**
      * @return mixed
      */
-    public function getLogin()
+    public function getUsername()
     {
-        return $this->login;
+        return $this->username;
     }
     /**
      * @param mixed $login
      */
-    public function setLogin($login)
+    public function setUsername($username)
     {
-        $this->login = $login;
+        $this->username = $username;
         return $this;
     }
     /**
@@ -66,7 +66,7 @@ class Adapter implements AdapterInterface
         $user = $this->em->getRepository('Auth\Entity\User')
             ->findByLoginAndPassword(
                 new User(),
-                $this->getLogin(),
+                $this->getUsername(),
                 $this->getPassword()
             );
         if ($user) {
@@ -75,7 +75,7 @@ class Adapter implements AdapterInterface
         return new Result(
             Result::FAILURE_CREDENTIAL_INVALID,
             null,
-            array('Login ou senha inválidos')
+            array('Username ou senha inválidos')
         );
     }
 }

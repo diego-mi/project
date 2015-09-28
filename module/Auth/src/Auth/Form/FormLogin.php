@@ -17,9 +17,9 @@ class FormLogin extends Form
         $this->setAttribute('action', '');
 
         $this->add(array(
-            'name' => 'login',
+            'name' => 'username',
             'options' => array(
-                'label' => 'Login',
+                'label' => 'Username',
             ),
             'type' => 'Text',
         ));

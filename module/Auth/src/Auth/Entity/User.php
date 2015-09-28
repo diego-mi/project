@@ -32,9 +32,9 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="login", type="string", length=40, nullable=false)
+     * @ORM\Column(name="username", type="string", length=40, nullable=false)
      */
-    private $login;
+    private $username;
 
     /**
      * @var string
@@ -87,27 +87,27 @@ class User
     }
 
     /**
-     * Set login
+     * Set username
      *
-     * @param string $login
+     * @param string $username
      *
      * @return User
      */
-    public function setLogin($login)
+    public function setUsername($username)
     {
-        $this->login = $login;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get login
+     * Get username
      *
      * @return string
      */
-    public function getLogin()
+    public function getUsername()
     {
-        return $this->login;
+        return $this->username;
     }
 
     /**

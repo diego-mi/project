@@ -17,9 +17,10 @@ class AuthController extends AbstractActionController
             $form->setData($this->getRequest()->getPost()->toArray());
             if ($form->isValid()) {
                 $data = $form->getData();
+                var_dump($data);
                 $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
                 $adapter = $auth->getAdapter();
-                $adapter->setLogin($data['login'])->setPassword($data['password']);
+                $adapter->setUsername($data['username'])->setPassword($data['password']);
                 if ($auth->authenticate()->isValid()) {
                     return $this->redirect()->toRoute(
                         'post',
@@ -43,5 +44,21 @@ class AuthController extends AbstractActionController
         var_dump($user);
         */
         return new ViewModel(array('form' => $form));
+    }
+
+    /**
+     * Logout
+     */
+    public function logoutAction() {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        $auth->clearIdentity();
+        $this->flashMessenger()->AddSuccessMessage("Logout realizado.");
+        return $this->redirect()->toRoute(
+            'login',
+            array(
+                'controller' => 'login',
+                'action' => 'index'
+            )
+        );
     }
 }

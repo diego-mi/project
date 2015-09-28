@@ -15,21 +15,23 @@ class UserRepository extends EntityRepository
 {
     /**
      * @param Usario $usuario
-     * @param $login
+     * @param $username
      * @param $password
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findByLoginAndPassword(User $usuario, $login, $password)
+    public function findByLoginAndPassword(User $usuario, $username, $password)
     {
-        $userLogin = $this
+        $userUsername = $this
             ->createQueryBuilder('u')
-            ->where('u.login = :a1')
-            ->setParameter('a1', $login)
+            ->where('u.username = :a1')
+            ->andWhere('u.password = :a2')
+            ->setParameter('a1', $username)
+            ->setParameter('a2', $password)
             ->getQuery()
             ->getOneOrNullResult();
 
-        if (!is_null($userLogin)) {
-            return $userLogin;
+        if (!is_null($userUsername)) {
+            return $userUsername;
         }
         return false;
     }

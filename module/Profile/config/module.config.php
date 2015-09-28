@@ -1,40 +1,40 @@
 <?php
-
-namespace Auth;
+namespace Profile;
 
 return array(
     'router' => array(
         'routes' => array(
-            'login' => array(
+            'profile' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/',
+                    'route'    => '/profile',
                     'defaults' => array(
-                        'controller' => 'Auth\Controller\Auth',
-                        'action'     => 'login',
+                        'controller' => 'Profile\Controller\Index',
+                        'action'     => 'index',
                     ),
-                )
-            ),
-            'logout' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/logout',
-                    'defaults' => array(
-                        'controller' => 'Auth\Controller\Auth',
-                        'action'     => 'logout',
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '[/:action[/:id]]',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'         => '\d+'
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
                     ),
-                )
+                ),
+
             ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'Auth\Controller\Auth' => 'Auth\Controller\AuthController'
-        ),
-    ),
-    'service_manager' => array(
-        'factories' => array(
-            'Zend\Authentication\AuthenticationService' => 'Auth\Authentication\Factory\AuthenticationFactory',
+            'Profile\Controller\Index' => 'Profile\Controller\IndexController'
         ),
     ),
     'view_manager' => array(
@@ -44,9 +44,9 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/login'           => __DIR__ . '/../view/layout/login.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'layout/layout'           => __DIR__ . '/../../Base/view/layout/layout.phtml',
+            'error/404'               => __DIR__ . '/../../Base/view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../../Base/view/error/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -67,3 +67,4 @@ return array(
         ),
     ),
 );
+

@@ -96,6 +96,15 @@ class VwPost extends AbstractEntity
      */
     private $postPicture;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_picture", type="string", nullable=true)
+     */
+    private $userPicture;
+
+
     /**
      * @return int
      */
@@ -262,5 +271,21 @@ class VwPost extends AbstractEntity
     public function setPostPicture($postPicture)
     {
         $this->postPicture = $postPicture;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserPicture()
+    {
+        return $this->userPicture;
+    }
+
+    /**
+     * @param string $userPicture
+     */
+    public function setUserPicture($userPicture)
+    {
+        $this->userPicture = $userPicture;
     }
 }

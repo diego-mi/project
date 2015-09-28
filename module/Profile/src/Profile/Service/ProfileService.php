@@ -22,7 +22,20 @@ class ProfileService extends AbstractService
      */
     public function save($data, $userId)
     {
+        if (count($data['picture'])) {
+            $data['picture'] = $this->getNewNameFileUpload($data['picture']['tmp_name']);
+        }
+
         return parent::save($data);
+    }
+
+    /**
+     * @param string $tmpName Nome temporario do arquivo que foi upado
+     */
+    protected function getNewNameFileUpload($tmpName)
+    {
+        $tmpNameFull = explode("_", $tmpName);
+        return $tmpNameFull[1];
     }
 
 }

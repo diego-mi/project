@@ -36,7 +36,7 @@ class FormLogin extends Form
             'name' => 'send',
             'type'  => 'Submit',
             'attributes' => array(
-                'value' => 'Submit',
+                'value' => 'Login',
             ),
         ));
 

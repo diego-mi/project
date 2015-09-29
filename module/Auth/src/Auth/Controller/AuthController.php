@@ -17,7 +17,6 @@ class AuthController extends AbstractActionController
             $form->setData($this->getRequest()->getPost()->toArray());
             if ($form->isValid()) {
                 $data = $form->getData();
-                var_dump($data);
                 $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
                 $adapter = $auth->getAdapter();
                 $adapter->setUsername($data['username'])->setPassword($data['password']);
@@ -34,15 +33,6 @@ class AuthController extends AbstractActionController
                 $this->flashMessenger()->AddErrorMessage($mensagem[0]);
             }
         }
-        /*
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $user =  $entityManager->getRepository('Auth\Entity\User')->findByLoginAndPassword(
-            new User(),
-            'aaa',
-            'aaa'
-        );
-        var_dump($user);
-        */
         return new ViewModel(array('form' => $form));
     }
 

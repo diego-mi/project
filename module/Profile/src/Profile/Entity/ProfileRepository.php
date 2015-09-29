@@ -2,7 +2,6 @@
 
 namespace Profile\Entity;
 
-use Auth\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**

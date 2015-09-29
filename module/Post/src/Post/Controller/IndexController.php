@@ -8,7 +8,7 @@ class IndexController extends AbstractController
 {
 
     /**
-     *
+     * __construct
      */
     function __construct()
     {
@@ -56,8 +56,6 @@ class IndexController extends AbstractController
                 } else {
                     $this->flashMessenger()->addErrorMessage('Não foi possivel cadastrar! Tente mais tarde.');
                 }
-                //return $this->redirect()
-                //    ->toRoute($this->route, array('controller' => $this->controller, 'action' => 'inserir'));
             } else {
                 $this->flashMessenger()->addErrorMessage('Form inválido.');
             }
@@ -82,15 +80,15 @@ class IndexController extends AbstractController
         return new ViewModel(array('form' => $form));
     }
 
-
+    /**
+     * @return ViewModel
+     */
     public function viewAction()
     {
-        $list = $this->getEm()->getRepository($this->entity)->find(array(), array('postId' => 'DESC'));
-        $this->form = $this->getServiceLocator()->get($this->form);
-
-        return new ViewModel(array('list' => $list, 'form' => $this->form));
+        $intPostId = $this->params()->fromRoute('id');
+        $post = $this->getEm()->getRepository($this->entity)->find($intPostId);
+        return new ViewModel(array('post' => $post));
     }
-
 
     /**
      * @return ViewModel

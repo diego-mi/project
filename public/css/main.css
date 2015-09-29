@@ -34,6 +34,7 @@
 
 .postar-btn-action {
     margin-top: 10px;
+    display: none;
 }
 .postar-btn-action button, .postar-btn-action a{
     float: right;
@@ -42,6 +43,11 @@
 .postar-foto {
     display: none;
 }
+#postar-btn-options {
+    display: none;
+}
+
+
 /* qdo ativo */
 .active .postar-principal {
 	margin-bottom: 7px;
@@ -55,6 +61,12 @@ display: block; }
 
 
 .active .postar-privacidade {
+    display: block;
+}
+.active #postar-btn-options {
+    display: inline-block;
+}
+.active .postar-btn-action {
     display: block;
 }
 /* FIM POSTAR */

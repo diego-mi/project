@@ -25,14 +25,16 @@ class IndexController extends AbstractController
     public function indexAction()
     {
         $data = array();
-        $data['postId'] = $this->params()->fromRoute('postid');
+        $post = $this->getRequest()->getPost()->toArray();
+        $data['postId'] = $post['postid'];
         $data['userId'] = $this->identity()->getId();
         $service = $this->getServiceLocator()->get($this->service);
 
-        if ($service->insert($data)) {
-            return new JsonModel(array('status' => true));
-        }
-        return new JsonModel(array('status' => false));
+        $result = $service->gostei($data);
+        //if ($service->gostei($data)) {
+          //  return new JsonModel(array('status' => true));
+        //}
+        return new JsonModel(array('status' => $result));
     }
 
 }

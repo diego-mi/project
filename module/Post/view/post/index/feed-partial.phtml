@@ -54,7 +54,7 @@ if ((isset($this->list)) && (!count($this->list))) {
             }
             ?>
             <div class="btn-group post-btn-actions">
-                <button class="btn btn-white btn-xs btn-gostei" data-postid="<?php echo($post->getPostId()); ?>">
+                <button class="btn btn-xs btn-gostei <?php echo(($post->getPostGostei()) ? 'btn-primary' : 'btn-white'); ?>" data-postid="<?php echo($post->getPostId()); ?>">
                     <i class="fa fa-heart"></i> Gostei
                 </button>
                 <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>

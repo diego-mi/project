@@ -29,12 +29,15 @@ select
 	user.name AS user_name,
 	user.picture AS user_picture,
 	post_types.name AS post_type_name,
-	post_types.id AS post_type_id
+	post_types.id AS post_type_id,
+	gostei.post_id AS post_gostei
 from posts
 inner join user
 	on posts.author_id = user.id
 inner join post_types
 	on posts.type = post_types.id
+left join gostei
+	on (posts.id = gostei.post_id AND user.id=gostei.user_id)
 
 
 CREATE VIEW Profile AS SELECT user.id as id, user.name as name, user.username as username, user.picture as picture, user.email as email FROM user

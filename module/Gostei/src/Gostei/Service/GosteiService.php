@@ -19,13 +19,31 @@ class GosteiService extends AbstractService
      *
      * @return object
      */
-    public function insert($data)
+    public function gostei($data)
     {
+        $mixGosteiExistente = $this->em->getRepository($this->entity)->findby($data);
+
+        if (count($mixGosteiExistente)) {
+            return $this->remove($data);
+        }
+
         $entity = new $this->entity($data);
         $this->em->persist($entity);
         $this->em->flush();
 
-        return $entity;
+        return '1';
+    }
+
+    public function remove(Array $data = array())
+    {
+        $entity = $this->em->getRepository($this->entity)->findOneBy($data);
+
+        if ($entity) {
+            $this->em->remove($entity);
+            $this->em->flush();
+
+            return '2';
+        }
     }
 
 }

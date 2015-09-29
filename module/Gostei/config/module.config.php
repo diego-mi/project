@@ -1,40 +1,16 @@
 <?php
-namespace Profile;
+namespace Gostei;
 
 return array(
     'router' => array(
         'routes' => array(
-            'profile' => array(
+            'gostei' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/profile',
+                    'route'    => '/gostei',
                     'defaults' => array(
-                        'controller' => 'Profile\Controller\Index',
+                        'controller' => 'Gostei\Controller\Index',
                         'action'     => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '[/:id]',
-                            'constraints' => array(
-                                'id'         => '\d+'
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'profile-editar' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/profile/editar',
-                    'defaults' => array(
-                        'controller' => 'Profile\Controller\Index',
-                        'action'     => 'editar',
                     ),
                 ),
             ),
@@ -42,7 +18,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Profile\Controller\Index' => 'Profile\Controller\IndexController'
+            'Gostei\Controller\Index' => 'Gostei\Controller\IndexController'
         ),
     ),
     'view_manager' => array(
@@ -59,6 +35,9 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+        'strategies' => array(
+            'ViewJsonStrategy'
+        )
     ),
     'doctrine' => array(
         'driver' => array(

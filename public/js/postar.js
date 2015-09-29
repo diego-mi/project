@@ -4,7 +4,7 @@ $(document).ready(function () {
 		console.log($(".postar").hasClass("active"));
 		if (!$(".postar").hasClass("active")) {
 			$(".postar").addClass("active");
-			console.log("b");	
+			console.log("b");
 		}
 	});
 

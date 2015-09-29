@@ -44,7 +44,6 @@ class IndexController extends AbstractController
         }
         $form = $this->getServiceLocator()->get($this->form);
         $request = $this->getRequest();
-
         if ($request->isPost()) {
             $form->setData(
                 array_merge_recursive(
@@ -52,24 +51,36 @@ class IndexController extends AbstractController
                     $request->getFiles()->toArray()
                 )
             );
+
             if ($form->isValid()) {
                 $service = $this->getServiceLocator()->get($this->service);
-                if ($service->save($form->getData(), $this->identity()->getId())) {
+                $data = $form->getData();
+
+                if (empty($data['picture']['tmp_name'])) {
+                    unset($data['picture']);
+                }
+
+                $data['id'] = $this->identity()->getId();
+                if ($service->save($data, $this->identity()->getId())) {
                     $this->flashMessenger()->addSuccessMessage('Editado com sucesso!');
                     return $this->redirect()
                         ->toRoute('profile-editar');
                 } else {
                     $this->flashMessenger()->addErrorMessage('Não foi possivel editar! Tente mais tarde.');
                 }
-                //return $this->redirect()
-                //    ->toRoute($this->route, array('controller' => $this->controller, 'action' => 'inserir'));
             } else {
                 $this->flashMessenger()->addErrorMessage('Form inválido.');
             }
         }
 
+
+        $profile = $this->getEm()->getRepository($this->entity)->find($intProfileId)->toArray();
+        $form = $this->getServiceLocator()->get($this->form);
+        $form->populateValues($profile);
+
         if ($this->flashMessenger()->hasSuccessMessages()) {
             return new ViewModel(array(
+                'profile' => $profile,
                 'form' => $form,
                 'success' => $this->flashMessenger()->getSuccessMessages()
             ));
@@ -77,14 +88,11 @@ class IndexController extends AbstractController
 
         if ($this->flashMessenger()->hasErrorMessages()) {
             return new ViewModel(array(
+                'profile' => $profile,
                 'form' => $form,
                 'error' => $this->flashMessenger()->getErrorMessages()
             ));
         }
-
-        $profile = $this->getEm()->getRepository($this->entity)->find($intProfileId)->toArray();
-        $form = $this->getServiceLocator()->get($this->form);
-        $form->populateValues($profile);
 
         return new ViewModel(array('profile' => $profile, 'form' => $form));
     }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Set-2015 às 22:16
+-- Generation Time: 29-Set-2015 às 21:18
 -- Versão do servidor: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -19,6 +19,17 @@ SET time_zone = "+00:00";
 --
 -- Database: `project`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `gostei`
+--
+
+CREATE TABLE IF NOT EXISTS `gostei` (
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -100,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `picture`) VALUES
-(1, 'Diego Mi Campos', 'diegomi', 'diegomister@gmail.com', '1234', '560996544cd6e.jpg'),
+(1, 'Diego Mi Campos', 'diegomi', 'diegomister@gmail.com', '1234', '560a914bb9ae5.jpg'),
 (2, 'User Test', 'test', 'test@gmail.com', 'test', NULL);
 
 -- --------------------------------------------------------
@@ -146,6 +157,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `gostei`
+--
+ALTER TABLE `gostei`
+  ADD KEY `post_id` (`post_id`), ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -185,6 +202,13 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Limitadores para a tabela `gostei`
+--
+ALTER TABLE `gostei`
+ADD CONSTRAINT `gostei_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+ADD CONSTRAINT `gostei_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Limitadores para a tabela `posts`

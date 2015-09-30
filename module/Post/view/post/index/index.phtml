@@ -4,7 +4,7 @@
     ?>
 
     <?php
-    echo($this->partial('post/index/feed-partial', array('list' => $list)));
+    echo($this->partial('post/index/feed-partial', array('list' => $list, 'gostei' => $this->gostei)));
     ?>
 <div
     <script defer src="<?php echo($this->basePath() . '/'); ?>js/feed.js"></script>

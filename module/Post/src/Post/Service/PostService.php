@@ -3,28 +3,36 @@ namespace Post\Service;
 
 use Base\Service\AbstractService;
 use Doctrine\ORM\EntityManager;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
-class PostService extends AbstractService
+class PostService
 {
+
+    protected $em;
+    protected $entity;
+
     public function __construct(EntityManager $em)
     {
         $this->entity = 'Post\Entity\Post';
-        parent::__construct($em);
+        $this->em = $em;
     }
 
-    /**
-     * @param array $data
-     *
-     * @param int $userId
-     * @param array $data
-     *
-     * @return object
-     */
-    public function save($data, $userId)
+    public function save($data)
     {
-        $data['authorId'] = $userId;
+        if ((isset($data['id'])) && (!empty($data['id']))) {
+            $entity = $this->em->getReference($this->entity, $data['id']);
 
-        return parent::save($data);
+            $hydrator = new ClassMethods();
+            $hydrator->hydrate($data, $entity);
+
+        } else {
+            $entity = new $this->entity($data);
+        }
+
+        $this->em->persist($entity);
+        $this->em->flush();
+
+        return $entity;
     }
 
     /**
@@ -38,13 +46,13 @@ class PostService extends AbstractService
     public function insert($data, $userId)
     {
         $data['authorId'] = $userId;
-        if ((count($data['picture'])) && (!empty($data['picture']['tmp_name'])) ) {
+        if ((count($data['picture'])) && (!empty($data['picture']['tmp_name']))) {
             $data['picture'] = $this->getNewNameFileUpload($data['picture']['tmp_name']);
         } else {
             unset($data['picture']);
         }
 
-        return parent::save($data);
+        return $this->save($data);
     }
 
     /**
@@ -53,7 +61,21 @@ class PostService extends AbstractService
     protected function getNewNameFileUpload($tmpName)
     {
         $tmpNameFull = explode("_", $tmpName);
+
         return $tmpNameFull[1];
+    }
+
+
+    public function getPosts($intUserId)
+    {
+        $posts = $this->em->getRepository('Post\Entity\VwPost')->findBy(array(), array('postId' => 'DESC'));
+        $listPostId = '';
+        foreach ($posts as $post) {
+            $listPostId[] = $post->getPostId();
+        }
+        $listPostId = implode(',', $listPostId);
+        $postsGostei = $this->em->getRepository('Gostei\Entity\Gostei')->getGostei($listPostId, $intUserId);
+        return array('posts' => $posts, 'gostei' => $postsGostei);
     }
 
 }

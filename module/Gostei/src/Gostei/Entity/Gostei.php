@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="gostei")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Gostei\Entity\GosteiRepository")
  */
 class Gostei extends AbstractEntity
 {
@@ -25,6 +26,7 @@ class Gostei extends AbstractEntity
      * @var string
      *
      * @ORM\Column(name="post_id", type="string", length=100, nullable=false)
+     * @ORM\Id
      */
     private $postId;
 

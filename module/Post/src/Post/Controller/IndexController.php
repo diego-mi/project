@@ -24,10 +24,11 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $list = $this->getEm()->getRepository($this->entity)->findBy(array(), array('postId' => 'DESC'));
+        $service = $this->getServiceLocator()->get($this->service);
+        $data = $service->getPosts($this->identity()->getId());
         $this->form = $this->getServiceLocator()->get($this->form);
 
-        return new ViewModel(array('list' => $list, 'form' => $this->form));
+        return new ViewModel(array('list' => $data['posts'], 'form' => $this->form, 'gostei' => $data['gostei']));
     }
 
     /**

@@ -104,14 +104,6 @@ class VwPost extends AbstractEntity
     private $userPicture;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="post_gostei", type="integer", nullable=true)
-     */
-    private $postGostei;
-
-
-    /**
      * @return int
      */
     public function getPostId()

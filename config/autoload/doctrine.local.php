@@ -8,7 +8,7 @@ return array(
                     'host' => 'localhost',
                     'port' => '3306',
                     'user' => 'root',
-                    'password' => '1234',
+                    'password' => '',
                     'dbname' => 'project',
                     'driverOptions' => array(
                         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"

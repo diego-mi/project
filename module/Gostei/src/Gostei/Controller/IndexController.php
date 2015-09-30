@@ -36,5 +36,4 @@ class IndexController extends AbstractController
         //}
         return new JsonModel(array('status' => $result));
     }
-
 }

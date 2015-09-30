@@ -41,7 +41,7 @@ class PostService extends AbstractService
         if ((count($data['picture'])) && (!empty($data['picture']['tmp_name'])) ) {
             $data['picture'] = $this->getNewNameFileUpload($data['picture']['tmp_name']);
         } else {
-            uset($data['picture']);
+            unset($data['picture']);
         }
 
         return parent::save($data);

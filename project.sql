@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 29-Set-2015 às 21:18
--- Versão do servidor: 5.6.24
--- PHP Version: 5.6.8
+-- Servidor: localhost
+-- Tempo de Geração: 29/09/2015 às 22:32
+-- Versão do servidor: 5.5.44-0ubuntu0.14.04.1
+-- Versão do PHP: 5.5.9-1ubuntu4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,39 +17,51 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `project`
+-- Banco de dados: `project`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `gostei`
+-- Estrutura para tabela `gostei`
 --
 
 CREATE TABLE IF NOT EXISTS `gostei` (
   `user_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL
+  `post_id` int(11) NOT NULL,
+  KEY `post_id` (`post_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `gostei`
+--
+
+INSERT INTO `gostei` (`user_id`, `post_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `posts`
+-- Estrutura para tabela `posts`
 --
 
 CREATE TABLE IF NOT EXISTS `posts` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` longtext,
   `type` int(11) NOT NULL,
   `author_id` int(11) NOT NULL,
   `privacity` int(11) DEFAULT '1' COMMENT '1=publico, 2=amigos',
   `classification` int(11) DEFAULT '1' COMMENT '1=free,2=18a',
   `picture` varchar(200) DEFAULT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `posts` (`author_id`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Extraindo dados da tabela `posts`
+-- Fazendo dump de dados para tabela `posts`
 --
 
 INSERT INTO `posts` (`id`, `content`, `type`, `author_id`, `privacity`, `classification`, `picture`, `date`) VALUES
@@ -60,17 +72,18 @@ INSERT INTO `posts` (`id`, `content`, `type`, `author_id`, `privacity`, `classif
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `post_types`
+-- Estrutura para tabela `post_types`
 --
 
 CREATE TABLE IF NOT EXISTS `post_types` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `icon` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `icon` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Extraindo dados da tabela `post_types`
+-- Fazendo dump de dados para tabela `post_types`
 --
 
 INSERT INTO `post_types` (`id`, `name`, `icon`) VALUES
@@ -81,7 +94,7 @@ INSERT INTO `post_types` (`id`, `name`, `icon`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `profile`
+-- Estrutura stand-in para view `profile`
 --
 CREATE TABLE IF NOT EXISTS `profile` (
 `id` int(11)
@@ -90,24 +103,26 @@ CREATE TABLE IF NOT EXISTS `profile` (
 ,`picture` varchar(100)
 ,`email` varchar(60)
 );
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Estrutura para tabela `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `username` varchar(40) NOT NULL,
   `email` varchar(60) NOT NULL,
   `password` varchar(40) NOT NULL,
-  `picture` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `picture` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Extraindo dados da tabela `user`
+-- Fazendo dump de dados para tabela `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `picture`) VALUES
@@ -117,7 +132,7 @@ INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `picture`) VA
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vwposts`
+-- Estrutura stand-in para view `vwposts`
 --
 CREATE TABLE IF NOT EXISTS `vwposts` (
 `post_id` int(11)
@@ -132,12 +147,12 @@ CREATE TABLE IF NOT EXISTS `vwposts` (
 ,`user_picture` varchar(100)
 ,`post_type_name` varchar(50)
 ,`post_type_id` int(11)
+,`post_gostei` int(11)
 );
-
 -- --------------------------------------------------------
 
 --
--- Structure for view `profile`
+-- Estrutura para view `profile`
 --
 DROP TABLE IF EXISTS `profile`;
 
@@ -146,76 +161,29 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `vwposts`
+-- Estrutura para view `vwposts`
 --
 DROP TABLE IF EXISTS `vwposts`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwposts` AS select `posts`.`id` AS `post_id`,`posts`.`content` AS `post_content`,`posts`.`type` AS `post_type`,`posts`.`date` AS `post_date`,`posts`.`classification` AS `post_classification`,`posts`.`privacity` AS `post_privacity`,`posts`.`picture` AS `post_picture`,`user`.`id` AS `user_id`,`user`.`name` AS `user_name`,`user`.`picture` AS `user_picture`,`post_types`.`name` AS `post_type_name`,`post_types`.`id` AS `post_type_id` from ((`posts` join `user` on((`posts`.`author_id` = `user`.`id`))) join `post_types` on((`posts`.`type` = `post_types`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwposts` AS select `posts`.`id` AS `post_id`,`posts`.`content` AS `post_content`,`posts`.`type` AS `post_type`,`posts`.`date` AS `post_date`,`posts`.`classification` AS `post_classification`,`posts`.`privacity` AS `post_privacity`,`posts`.`picture` AS `post_picture`,`user`.`id` AS `user_id`,`user`.`name` AS `user_name`,`user`.`picture` AS `user_picture`,`post_types`.`name` AS `post_type_name`,`post_types`.`id` AS `post_type_id`,`gostei`.`post_id` AS `post_gostei` from (((`posts` join `user` on((`posts`.`author_id` = `user`.`id`))) join `post_types` on((`posts`.`type` = `post_types`.`id`))) left join `gostei` on(((`posts`.`id` = `gostei`.`post_id`) and (`user`.`id` = `gostei`.`user_id`))));
 
 --
--- Indexes for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Indexes for table `gostei`
+-- Restrições para tabelas `gostei`
 --
 ALTER TABLE `gostei`
-  ADD KEY `post_id` (`post_id`), ADD KEY `user_id` (`user_id`);
+  ADD CONSTRAINT `gostei_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  ADD CONSTRAINT `gostei_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
--- Indexes for table `posts`
+-- Restrições para tabelas `posts`
 --
 ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`), ADD KEY `posts` (`author_id`), ADD KEY `type` (`type`);
-
---
--- Indexes for table `post_types`
---
-ALTER TABLE `post_types`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `email` (`email`), ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `post_types`
---
-ALTER TABLE `post_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- Constraints for dumped tables
---
-
---
--- Limitadores para a tabela `gostei`
---
-ALTER TABLE `gostei`
-ADD CONSTRAINT `gostei_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
-ADD CONSTRAINT `gostei_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
-
---
--- Limitadores para a tabela `posts`
---
-ALTER TABLE `posts`
-ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `user` (`id`),
-ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`type`) REFERENCES `post_types` (`id`);
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`type`) REFERENCES `post_types` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

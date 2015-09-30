@@ -37,7 +37,6 @@ class GosteiService extends AbstractService
     public function remove(Array $data = array())
     {
         $entity = $this->em->getRepository($this->entity)->findOneBy($data);
-
         if ($entity) {
             $this->em->remove($entity);
             $this->em->flush();

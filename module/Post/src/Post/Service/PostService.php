@@ -66,15 +66,15 @@ class PostService
     }
 
 
-    public function getPosts($intUserId)
+    public function getPosts($intUserViewer, $arrUserPosts)
     {
-        $posts = $this->em->getRepository('Post\Entity\VwPost')->findBy(array(), array('postId' => 'DESC'));
+        $posts = $this->em->getRepository('Post\Entity\VwPost')->findBy(array('userId' => $arrUserPosts), array('postId' => 'DESC'));
         $listPostId = '';
         foreach ($posts as $post) {
             $listPostId[] = $post->getPostId();
         }
         $listPostId = implode(',', $listPostId);
-        $postsGostei = $this->em->getRepository('Gostei\Entity\Gostei')->getGostei($listPostId, $intUserId);
+        $postsGostei = $this->em->getRepository('Gostei\Entity\Gostei')->getGostei($listPostId, $intUserViewer);
         return array('posts' => $posts, 'gostei' => $postsGostei);
     }
 

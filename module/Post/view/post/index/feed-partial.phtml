@@ -32,12 +32,12 @@ if ((isset($this->list)) && (!count($this->list))) {
         <!-- end social-action -->
         <!-- social-avatar -->
         <div class="social-avatar">
-            <a href="" class="pull-left">
-                <img alt="image" src="<?php echo($this->basePath() . '/upload/profile/img_' . $post->getUserPicture());?>">
+            <a href="<?php echo($this->url('profile') . '/' . $post->getUserId()); ?>" class="pull-left">
+                <img onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user.png'); ?>'" alt="image" src="<?php echo($this->basePath() . '/upload/profile/img_' . $post->getUserPicture());?>">
             </a>
 
             <div class="media-body">
-                <a href="#">
+                <a href="<?php echo($this->url('profile') . '/' . $post->getUserId()); ?>">
                     <?php echo($post->getUserName()); ?>
                 </a>
                 <span class="badge badge-info float-right"><?php echo($post->getPostTypeName()); ?></span>
@@ -56,7 +56,10 @@ if ((isset($this->list)) && (!count($this->list))) {
             <?php
             $img = $post->getPostPicture();
             if ($img) {
-                echo('<img src="' . $this->basePath() . '/upload/posts/img_' . $img . '" class="img-responsive">');
+                ?>
+                <img src="<?php echo($this->basePath() . '/upload/posts/img_' . $img . '" class="img-responsive"'); ?>"
+                     onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post.jpg'); ?>'">
+            <?php
             }
             ?>
             <div class="btn-group post-btn-actions">

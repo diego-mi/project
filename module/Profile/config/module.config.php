@@ -5,26 +5,12 @@ return array(
     'router' => array(
         'routes' => array(
             'profile' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route'    => '/profile',
+                    'route'    => '/profile[/:id]',
                     'defaults' => array(
                         'controller' => 'Profile\Controller\Index',
                         'action'     => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '[/:id]',
-                            'constraints' => array(
-                                'id'         => '\d+'
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
                     ),
                 ),
             ),

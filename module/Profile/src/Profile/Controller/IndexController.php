@@ -28,9 +28,12 @@ class IndexController extends AbstractController
         if ( empty($intProfileId)) {
             $intProfileId = $this->identity()->getId();
         }
+
+        $servicePost = $this->getServiceLocator()->get('Post\Service\PostService');
+        $data = $servicePost->getPosts($this->identity()->getId(), $intProfileId);
+
         $profile = $this->getEm()->getRepository($this->entity)->find($intProfileId);
-        $posts = $this->getEm()->getRepository('Post\Entity\VwPost')->findBy(array('userId' => $intProfileId));
-        return new ViewModel(array('profile' => $profile, 'list' => $posts));
+        return new ViewModel(array('profile' => $profile, 'list' => $data['posts'], 'gostei' => $data['gostei']));
     }
 
     /**

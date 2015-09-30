@@ -1,15 +1,15 @@
 <?php
-namespace Gostei;
+namespace Friend;
 
 return array(
     'router' => array(
         'routes' => array(
-            'gostei' => array(
+            'friend' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/gostei',
+                    'route'    => '/friend',
                     'defaults' => array(
-                        'controller' => 'Gostei\Controller\Index',
+                        'controller' => 'Friend\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),
@@ -18,7 +18,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Gostei\Controller\Index' => 'Gostei\Controller\IndexController'
+            'Friend\Controller\Index' => 'Friend\Controller\IndexController'
         ),
     ),
     'view_manager' => array(

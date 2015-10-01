@@ -41,3 +41,65 @@ CREATE VIEW Profile AS SELECT user.id as id, user.name as name, user.username as
 
 INSERT INTO user (name, login, email, password)
 VALUES ('Diego Mi Campos', 'diegomi', 'diegomister@gmail.com', '1234');
+
+CREATE VIEW vwfriend AS
+select
+	friend.user_id as user_id,
+	user.id AS friend_id,
+	user.name AS friend_name,
+	user.username AS friend_username,
+	user.picture AS friend_picture,
+	user.email AS friend_email
+from user
+inner join friend
+	on user.id = friend.friend_id
+
+CREATE VIEW vwfriendflrs AS
+select
+    friend.friend_id AS user_id,
+    friend.user_id as friend_id,
+    user.name AS friend_name,
+    user.username AS friend_username,
+    user.picture AS friend_picture,
+    user.email AS friend_email
+from user
+inner join friend
+    on user.id = friend.user_id
+
+--- SEGUINDO ---
+# SQL #
+CREATE VIEW following AS
+select
+	friend.user_id AS follower_id,
+	user.id AS following_id,
+    user.name AS following_name,
+    user.username AS following_username,
+    user.picture AS following_picture,
+    user.email AS following_email
+FROM user
+Inner JOIN friend
+	on user.id = friend.friend_id
+# SQL #
+--- END SEGUINDO ---
+
+--- SEGUIDORES ---
+# SQL #
+CREATE VIEW followers AS
+select
+	friend.friend_id AS following_id,
+	user.id AS follower_id,
+    user.name AS follower_name,
+    user.username AS follower_username,
+    user.picture AS follower_picture,
+    user.email AS follower_email
+FROM user
+Inner JOIN friend
+	on user.id = friend.user_id
+# SQL #
+--- END SEGUIDORES ---
+
+INVERSO
+friendId tem userId
+    user.id                     - seguidor
+    friend.friend_id            - seguido
+    on user.id = friend.user_id // carrego infos de quem

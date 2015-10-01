@@ -31,9 +31,6 @@ class IndexController extends AbstractController
         $service = $this->getServiceLocator()->get($this->service);
 
         $result = $service->gostei($data);
-        //if ($service->gostei($data)) {
-          //  return new JsonModel(array('status' => true));
-        //}
         return new JsonModel(array('status' => $result));
     }
 }

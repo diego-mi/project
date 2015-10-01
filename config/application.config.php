@@ -8,8 +8,8 @@ return array(
         'Base',
         'Post',
         'Profile',
+        'Friend',
         'Gostei',
-        'Friend'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

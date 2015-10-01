@@ -24,16 +24,28 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
+        $friends = array();
         $intProfileId =  $page = $this->params()->fromRoute('id');
         if ( empty($intProfileId)) {
             $intProfileId = $this->identity()->getId();
         }
 
+        $friends = $this->getEm()->getRepository('Friend\Entity\VwFriend')->findBy(
+            array('userId' => $this->identity()->getId()),
+            array('friendName' => 'ASC'),
+            10
+        );
+
         $servicePost = $this->getServiceLocator()->get('Post\Service\PostService');
         $data = $servicePost->getPosts($this->identity()->getId(), $intProfileId);
 
         $profile = $this->getEm()->getRepository($this->entity)->find($intProfileId);
-        return new ViewModel(array('profile' => $profile, 'list' => $data['posts'], 'gostei' => $data['gostei']));
+        return new ViewModel(array(
+            'profile' => $profile,
+            'list' => $data['posts'],
+            'gostei' => $data['gostei'],
+            'friends' => $friends
+        ));
     }
 
     /**

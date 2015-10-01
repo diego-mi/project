@@ -1,8 +1,7 @@
 <?php
 namespace Friend;
 
-use Gostei\Service\GosteiService;
-use Gostei\Form\GosteiForm;
+use Friend\Service\FriendService;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -37,9 +36,6 @@ class Module
             'factories' => array(
                 'Friend\Service\FriendService' => function($em){
                     return new FriendService($em->get('Doctrine\ORM\EntityManager'));
-                },
-                'Friend\Form\FriendForm' => function($em){
-                    return new FriendForm($em->get('Doctrine\ORM\EntityManager'));
                 }
             )
         );

@@ -24,7 +24,9 @@
                 </h2>
                 <small>Founder of Groupeq</small>
             </div>
-            <img src="<?php echo($this->basePath() . '/upload/profile/img_' . $this->profile->getPicture()); ?>"
+            <img
+                onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user-lg.png'); ?>'"
+                src="<?php echo($this->basePath() . '/upload/profile/img_' . $this->profile->getPicture()); ?>"
                  class="img-circle circle-border m-b-md img-responsive" alt="profile">
             <div>
                 <span>100 Tweets</span> |
@@ -33,18 +35,35 @@
             </div>
         </div>
         <div class="widget-text-box">
-            <h4 class="media-heading text-center"><?php echo($this->profile->getUSername()); ?></h4>
+            <h4 class="media-heading text-center">@<?php echo($this->profile->getUSername()); ?></h4>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
             <div class="friend-div-btns">
-                <button class="btn btn-sm btn-white friend-btn-add" data-friendid="<?php echo($this->profile->getId()); ?>">
-                    <i class="fa fa-plus friend-i-seguir"></i> <span class="friend-span-seguir">Seguir</span>
-                </button>
+                <?php
+                if ($this->isFollowing) {
+                    ?>
+                    <button
+                        class="btn btn-sm btn-primary friend-btn-add"
+                        data-friendid="<?php echo($this->profile->getId()); ?>"
+                        title="Click para deixar de seguir...">
+                        <i class="fa fa-check friend-i-seguir"></i> <span class="friend-span-seguir">Seguindo</span>
+                    </button>
+                <?php
+                } else {
+                    ?>
+                    <button
+                        class="btn btn-sm btn-white friend-btn-add"
+                        data-friendid="<?php echo($this->profile->getId()); ?>"
+                        title="Click para seguir...">
+                        <i class="fa fa-plus friend-i-seguir"></i> <span class="friend-span-seguir">Seguir</span>
+                    </button>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
 
     <div class="clearfix"></div>
-
     <?php
     if ((isset($this->friends)) && (count($this->friends))) { ?>
         <div class="ibox">
@@ -60,13 +79,13 @@
                     <?php
                     foreach ($this->friends as $friend)
                     ?>
-                    <a href="<?php echo($this->url('profile') . '/' . $friend->getFriendId()); ?>"
-                        title="<?php echo($friend->getFriendName()); ?>">
+                    <a href="<?php echo($this->url('profile') . '/' . $friend->getFollowingId()); ?>"
+                        title="<?php echo($friend->getFollowingName()); ?>">
                         <img
                             onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user.png'); ?>'"
                             alt="image"
                             class="img-circle"
-                            src="<?php echo($this->basePath() . '/upload/profile/img_' . $friend->getFriendPicture());?>">
+                            src="<?php echo($this->basePath() . '/upload/profile/img_' . $friend->getFollowingPicture());?>">
                     </a>
                 </div>
             </div>

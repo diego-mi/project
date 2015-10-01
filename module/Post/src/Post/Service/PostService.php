@@ -65,17 +65,61 @@ class PostService
         return $tmpNameFull[1];
     }
 
-
-    public function getPosts($intUserViewer, $arrUserPosts)
+    public function getPostsFeed($intUserViewer)
     {
-        $posts = $this->em->getRepository('Post\Entity\VwPost')->findBy(array('userId' => $arrUserPosts), array('postId' => 'DESC'));
+        $arrFollowingIds = $this->getFollowingIds($intUserViewer);
+        array_push($arrFollowingIds, $intUserViewer);
+        $posts = $this->em->getRepository('Post\Entity\VwPost')->findBy(
+            array(
+                'userId' => $arrFollowingIds,
+            ),
+            array('postId' => 'DESC'
+            )
+        );
         $listPostId = '';
         foreach ($posts as $post) {
             $listPostId[] = $post->getPostId();
         }
+
         $listPostId = implode(',', $listPostId);
         $postsGostei = $this->em->getRepository('Gostei\Entity\Gostei')->getGostei($listPostId, $intUserViewer);
         return array('posts' => $posts, 'gostei' => $postsGostei);
+    }
+
+    public function getPostsProfile($intUserViewer)
+    {
+        $posts = $this->em->getRepository('Post\Entity\VwPost')->findBy(
+            array(
+                'userId' => $intUserViewer,
+            ),
+            array('postId' => 'DESC'
+            )
+        );
+        $listPostId = '';
+        foreach ($posts as $post) {
+            $listPostId[] = $post->getPostId();
+        }
+
+        $listPostId = implode(',', $listPostId);
+        $postsGostei = $this->em->getRepository('Gostei\Entity\Gostei')->getGostei($listPostId, $intUserViewer);
+        return array('posts' => $posts, 'gostei' => $postsGostei);
+    }
+
+    protected function getFollowingIds($intUserViewer) {
+        $arrFollowing =  $this->em->getRepository('Friend\Entity\Following')->findBy(
+            array(
+                'followerId' => $intUserViewer
+            ),
+            array(
+                'followingName' => 'ASC'
+            ),
+            10
+        );
+        $arrFollowingIds = array();
+        foreach ($arrFollowing as $following => $key) {
+            $arrFollowingIds[] = $key->getFollowingId();
+        }
+        return $arrFollowingIds;
     }
 
 }

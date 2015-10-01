@@ -1,6 +1,6 @@
 <?php
 
-namespace Gostei\Entity;
+namespace Friend\Entity;
 
 use Base\Entity\AbstractEntity;
 use Doctrine\ORM\Mapping as ORM;
@@ -8,11 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Profile
  *
- * @ORM\Table(name="gostei")
+ * @ORM\Table(name="friend")
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Gostei\Entity\GosteiRepository")
+ * @ORM\Entity(repositoryClass="Friend\Entity\FriendRepository")
  */
-class Gostei extends AbstractEntity
+class Friend extends AbstractEntity
 {
     /**
      * @var integer
@@ -23,12 +23,12 @@ class Gostei extends AbstractEntity
     private $userId;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="post_id", type="string", length=100, nullable=false)
+     * @ORM\Column(name="friend_id", type="integer", nullable=false)
      * @ORM\Id
      */
-    private $postId;
+    private $friendId;
 
     /**
      * @return int
@@ -48,21 +48,18 @@ class Gostei extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getPostId()
+    public function getFriendId()
     {
-        return $this->postId;
+        return $this->friendId;
     }
 
     /**
-     * @param string $postId
+     * @param int $friendId
      */
-    public function setPostId($postId)
+    public function setFriendId($friendId)
     {
-        $this->postId = $postId;
-        return $this;
+        $this->friendId = $friendId;
     }
-
-
 }

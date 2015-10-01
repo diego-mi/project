@@ -78,6 +78,18 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Ver Amigos </span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="<?php echo($this->url('friend-following')); ?>">Seguindo</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo($this->url('friend-followers')); ?>">Seguidores</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
 
         </div>
@@ -571,6 +583,7 @@
 <script src="<?php echo($this->basePath() . '/'); ?>js/inspinia.js"></script>
 <script src="<?php echo($this->basePath() . '/'); ?>js/plugins/pace/pace.min.js"></script>
 <script src="<?php echo($this->basePath() . '/'); ?>js/postar.js"></script>
+<script src="<?php echo($this->basePath() . '/'); ?>js/friend.js"></script>
 
 
 </body>

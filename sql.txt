@@ -41,3 +41,15 @@ CREATE VIEW Profile AS SELECT user.id as id, user.name as name, user.username as
 
 INSERT INTO user (name, login, email, password)
 VALUES ('Diego Mi Campos', 'diegomi', 'diegomister@gmail.com', '1234');
+
+CREATE VIEW vwfriend AS
+select
+	user.id AS friend_id,
+	user.name AS friend_name,
+	user.username AS friend_username,
+	user.picture AS friend_picture,
+	user.email AS friend_email,
+	friend.user_id as user_id
+from user
+inner join friend
+	on user.id = friend.friend_id

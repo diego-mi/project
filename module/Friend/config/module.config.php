@@ -7,10 +7,30 @@ return array(
             'friend' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/friend',
+                    'route' => '/friend',
                     'defaults' => array(
                         'controller' => 'Friend\Controller\Index',
-                        'action'     => 'index',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+            'friend-followers' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/ver-seguidores',
+                    'defaults' => array(
+                        'controller' => 'Friend\Controller\Index',
+                        'action' => 'ver-Seguidores',
+                    ),
+                ),
+            ),
+            'friend-following' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/ver-seguindo',
+                    'defaults' => array(
+                        'controller' => 'Friend\Controller\Index',
+                        'action' => 'ver-Seguindo',
                     ),
                 ),
             ),
@@ -22,9 +42,12 @@ return array(
         ),
     ),
     'view_manager' => array(
+        'template_path_stack' => array(
+            __DIR__ . '/../view',
+        ),
         'strategies' => array(
-            'ViewJsonStrategy'
-        )
+            'ViewJsonStrategy',
+        ),
     ),
     'doctrine' => array(
         'driver' => array(

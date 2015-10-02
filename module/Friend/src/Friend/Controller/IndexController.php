@@ -37,12 +37,12 @@ class IndexController extends AbstractController
 
     public function verSeguindoAction()
     {
-        $friends = $this->getEm()->getRepository('Friend\Entity\VwFriend')->findBy(
+        $friends = $this->getEm()->getRepository('Friend\Entity\Following')->findBy(
             array(
-                'userId' => $this->identity()->getId()
+                'followerId' => $this->identity()->getId()
             ),
             array(
-                'friendName' => 'ASC'
+                'followingName' => 'ASC'
             ),
             10
         );
@@ -51,12 +51,12 @@ class IndexController extends AbstractController
 
     public function verSeguidoresAction()
     {
-        $friends = $this->getEm()->getRepository('Friend\Entity\VwFriend')->findBy(
+        $friends = $this->getEm()->getRepository('Friend\Entity\Followers')->findBy(
             array(
-                'ProfileId' => $this->identity()->getId()
+                'followingId' => $this->identity()->getId()
             ),
             array(
-                'friendName' => 'ASC'
+                'followerName' => 'ASC'
             ),
             10
         );

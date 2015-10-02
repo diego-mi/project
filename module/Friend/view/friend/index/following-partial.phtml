@@ -15,16 +15,16 @@ foreach ($this->friends as $friend) {
     <div class="col-lg-3">
         <div class="contact-box center-version">
 
-            <a href="<?php echo($this->url('profile') . '/' . $friend->getFriendId()); ?>">
+            <a href="<?php echo($this->url('profile') . '/' . $friend->getFollowingId()); ?>">
 
                 <img
                     alt="image"
                     class="img-circle"
-                    src="<?php echo($this->basePath() . '/upload/profile/img_' . $friend->getFriendPicture()); ?>"
+                    src="<?php echo($this->basePath() . '/upload/profile/img_' . $friend->getFollowingPicture()); ?>"
                     onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user.png'); ?>'">
 
 
-                <h3 class="m-b-xs"><strong><?php echo($friend->getFriendName()); ?></strong></h3>
+                <h3 class="m-b-xs"><strong><?php echo($friend->getFollowingName()); ?></strong></h3>
 
                 <div class="font-bold">Graphics designer</div>
                 <address class="m-t-md">

@@ -50,7 +50,12 @@ class User
      */
     private $password;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="picture", type="string", length=100, nullable=false)
+     */
+    private $picture;
 
     /**
      * Get id
@@ -156,5 +161,21 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param string $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
     }
 }

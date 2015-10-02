@@ -6,7 +6,7 @@ if ((isset($this->friends)) && (!count($this->friends))) {
             <h3 class="text-center">Sem usuários a mostrar...</h3>
         </div>
     </div>
-    <?php
+<?php
 }
 
 
@@ -15,16 +15,16 @@ foreach ($this->friends as $friend) {
     <div class="col-lg-3">
         <div class="contact-box center-version">
 
-            <a href="<?php echo($this->url('profile') . '/' . $friend->getFriendId()); ?>">
+            <a href="<?php echo($this->url('profile') . '/' . $friend->getFollowerId()); ?>">
 
                 <img
                     alt="image"
                     class="img-circle"
-                    src="<?php echo($this->basePath() . '/upload/profile/img_' . $friend->getFriendPicture()); ?>"
+                    src="<?php echo($this->basePath() . '/upload/profile/img_' . $friend->getFollowerPicture()); ?>"
                     onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user.png'); ?>'">
 
 
-                <h3 class="m-b-xs"><strong><?php echo($friend->getFriendName()); ?></strong></h3>
+                <h3 class="m-b-xs"><strong><?php echo($friend->getFollowerName()); ?></strong></h3>
 
                 <div class="font-bold">Graphics designer</div>
                 <address class="m-t-md">
@@ -46,6 +46,6 @@ foreach ($this->friends as $friend) {
 
         </div>
     </div>
-    <?php
+<?php
 }
 ?>

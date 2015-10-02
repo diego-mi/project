@@ -1,14 +1,14 @@
 <?php
-namespace Friend\Service;
+namespace Comment\Service;
 
 use Base\Service\AbstractService;
 use Doctrine\ORM\EntityManager;
 
-class FriendService extends AbstractService
+class CommentService extends AbstractService
 {
     public function __construct(EntityManager $em)
     {
-        $this->entity = 'Friend\Entity\Friend';
+        $this->entity = 'Comment\Entity\Comment';
         parent::__construct($em);
     }
 
@@ -19,14 +19,8 @@ class FriendService extends AbstractService
      *
      * @return object
      */
-    public function friend($data)
+    public function comment($data)
     {
-        $mixFriendExistente = $this->em->getRepository($this->entity)->findby($data);
-
-        if (count($mixFriendExistente)) {
-            return $this->remove($data);
-        }
-
         $entity = new $this->entity($data);
         $this->em->persist($entity);
         $this->em->flush();

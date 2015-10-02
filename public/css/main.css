@@ -85,3 +85,10 @@ display: block; }
 /*     POST       */
 
 /*     END POST       */
+
+/*     MENU USER       */
+.menu-user-picture {
+    width: 48px;
+    height: 48px;
+}
+/*     MENU USER       */

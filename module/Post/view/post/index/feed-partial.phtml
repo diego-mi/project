@@ -73,42 +73,44 @@ if ((isset($this->list)) && (!count($this->list))) {
         <!-- end social-body -->
         <!-- social-footer -->
         <div class="social-footer">
-            <!-- social-comment -->
-            <div class="social-comment">
-                <a href="" class="pull-left">
-                    <img alt="image" src="<?php echo($this->basePath() . '/'); ?>img/a1.jpg">
-                </a>
-
-                <div class="media-body">
-                    <a href="#">
-                        Andrew Williams
+            <div class="comment-container comment-container-<?php echo($post->getPostid()); ?>">
+                <!-- social-comment -->
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="<?php echo($this->basePath() . '/'); ?>img/a1.jpg">
                     </a>
-                    Internet tend to repeat predefined chunks as necessary, making this the first true generator on
-                    the
-                    Internet. It uses a dictionary of over 200 Latin words.
-                    <br>
-                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
-                    <small class="text-muted">12.06.2014</small>
-                </div>
-            </div>
-            <!-- end social-comment -->
-            <!-- social-comment -->
-            <div class="social-comment">
-                <a href="" class="pull-left">
-                    <img alt="image" src="<?php echo($this->basePath() . '/'); ?>img/a2.jpg">
-                </a>
 
-                <div class="media-body">
-                    <a href="#">
-                        Andrew Williams
-                    </a>
-                    Making this the first true generator on the Internet. It uses a dictionary of.
-                    <br>
-                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
-                    <small class="text-muted">10.07.2014</small>
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Internet tend to repeat predefined chunks as necessary, making this the first true generator on
+                        the
+                        Internet. It uses a dictionary of over 200 Latin words.
+                        <br>
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                        <small class="text-muted">12.06.2014</small>
+                    </div>
                 </div>
+                <!-- end social-comment -->
+                <!-- social-comment -->
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="<?php echo($this->basePath() . '/'); ?>img/a2.jpg">
+                    </a>
+
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Making this the first true generator on the Internet. It uses a dictionary of.
+                        <br>
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                        <small class="text-muted">10.07.2014</small>
+                    </div>
+                </div>
+                <!-- end social-comment -->
             </div>
-            <!-- end social-comment -->
             <!-- social-comment -->
             <div class="social-comment">
                 <a href="" class="pull-left">
@@ -116,7 +118,7 @@ if ((isset($this->list)) && (!count($this->list))) {
                 </a>
 
                 <div class="media-body">
-                    <textarea class="form-control" placeholder="Write comment..."></textarea>
+                    <textarea class="form-control input-comment" data-postid="<?php echo($post->getPostid()); ?>" placeholder="Write comment..."></textarea>
                 </div>
             </div>
             <!-- end social-comment -->

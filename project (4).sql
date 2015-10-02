@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Out-2015 às 21:15
+-- Generation Time: 01-Out-2015 às 21:36
 -- Versão do servidor: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -19,27 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `project`
 --
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `comment`
---
-
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) NOT NULL,
-  `content` longtext NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `post_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `comment`
---
-
-INSERT INTO `comment` (`id`, `content`, `user_id`, `date`, `post_id`) VALUES
-(0, 'fsdfsdfs\n', 1, '2015-10-02 19:14:28', 15);
 
 -- --------------------------------------------------------
 
@@ -113,8 +92,7 @@ INSERT INTO `gostei` (`user_id`, `post_id`) VALUES
 (1, 3),
 (1, 13),
 (1, 12),
-(1, 11),
-(1, 15);
+(1, 11);
 
 -- --------------------------------------------------------
 
@@ -318,12 +296,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
--- Indexes for table `comment`
---
-ALTER TABLE `comment`
-  ADD PRIMARY KEY (`id`), ADD KEY `user_id` (`user_id`), ADD KEY `post_id` (`post_id`);
-
---
 -- Indexes for table `friend`
 --
 ALTER TABLE `friend`
@@ -375,13 +347,6 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
-
---
--- Limitadores para a tabela `comment`
---
-ALTER TABLE `comment`
-ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
 
 --
 -- Limitadores para a tabela `friend`

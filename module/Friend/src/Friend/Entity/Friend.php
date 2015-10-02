@@ -1,5 +1,4 @@
 <?php
-
 namespace Friend\Entity;
 
 use Base\Entity\AbstractEntity;
@@ -21,7 +20,6 @@ class Friend extends AbstractEntity
      * @ORM\Id
      */
     private $userId;
-
     /**
      * @var integer
      *
@@ -44,6 +42,7 @@ class Friend extends AbstractEntity
     public function setUserId($userId)
     {
         $this->userId = $userId;
+
         return $this;
     }
 

@@ -1,8 +1,7 @@
 <?php
-namespace Profile;
+namespace Comment;
 
-use Profile\Service\ProfileService;
-use Profile\Form\ProfileForm;
+use Comment\Service\CommentService;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -13,8 +12,6 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-
-
     }
 
     public function getConfig()
@@ -37,12 +34,9 @@ class Module
     {
         return array(
             'factories' => array(
-                'Profile\Service\ProfileService' => function($em){
-                    return new ProfileService($em->get('Doctrine\ORM\EntityManager'));
+                'Comment\Service\CommentService' => function($em){
+                    return new CommentService($em->get('Doctrine\ORM\EntityManager'));
                 },
-                'Profile\Form\ProfileForm' => function($em){
-                    return new ProfileForm($em->get('Doctrine\ORM\EntityManager'));
-                }
             )
         );
     }

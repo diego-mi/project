@@ -25,7 +25,7 @@ class IndexController extends AbstractController
     public function indexAction()
     {
         $service = $this->getServiceLocator()->get($this->service);
-        $data = $service->getPosts($this->identity()->getId(),array(1,2));
+        $data = $service->getPostsFeed($this->identity()->getId());
         $this->form = $this->getServiceLocator()->get($this->form);
 
         return new ViewModel(array('list' => $data['posts'], 'form' => $this->form, 'gostei' => $data['gostei']));

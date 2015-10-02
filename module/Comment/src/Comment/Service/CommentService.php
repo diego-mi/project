@@ -25,7 +25,7 @@ class CommentService extends AbstractService
         $this->em->persist($entity);
         $this->em->flush();
 
-        return '1';
+        return $this->em->getRepository($this->entity)->findBy(array('postId' => $data['postId']));
     }
 
     public function remove(Array $data = array())

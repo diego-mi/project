@@ -31,8 +31,23 @@ class IndexController extends AbstractController
         $data['userId'] = $this->identity()->getId();
         $service = $this->getServiceLocator()->get($this->service);
 
+
         $result = $service->comment($data);
-        return new JsonModel(array('status' => $result));
+
+        $htmlViewPart = new ViewModel();
+        $htmlViewPart->setTerminal(true)
+            ->setTemplate('comment/index/index')
+            ->setVariables(array(
+                'comments' => $result
+            ));
+
+        $htmlOutput = $this->getServiceLocator()
+            ->get('viewrenderer')
+            ->render($htmlViewPart);
+
+
+
+        return new JsonModel(array('status' => $htmlOutput));
     }
 
 }

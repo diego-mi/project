@@ -33,10 +33,7 @@ $(document).ready(function () {
             var content = $(this).val();
 
             $.post("/comment", {postid: postId, content: content}, function (data) {
-                if (data.status == 1) {
-                    //$(commentContainer).append(data.comment);
-                    console.log(data);
-                }
+                $(commentContainer).html(data.status);
             });
         }
     });

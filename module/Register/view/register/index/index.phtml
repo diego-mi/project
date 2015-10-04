@@ -1,0 +1,52 @@
+<?php
+// In any of your .phtml files:
+$flash = $this->flashMessenger();
+$flash->setMessageOpenFormat('<div%s>
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+         &times;
+     </button>
+     <ul><li>')
+    ->setMessageSeparatorString('</li><li>')
+    ->setMessageCloseString('</li></ul></div>');
+
+echo $flash->render('error', array('alert', 'alert-dismissible', 'alert-danger'));
+echo $flash->render('info', array('alert', 'alert-dismissible', 'alert-info'));
+echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
+echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
+
+$form = $this->form;
+$form->prepareElements();
+?>
+
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <p>Register</p>
+        <?php echo $this->form()->openTag($form); ?>
+        <div class="form-group">
+            <input name="username" type="text" class="form-control" placeholder="username" required="">
+        </div>
+        <div class="form-group">
+            <input name="name" type="text" class="form-control" placeholder="name" required="">
+        </div>
+        <div class="form-group">
+            <input name="email" type="text" class="form-control" placeholder="email" required="">
+        </div>
+        <div class="form-group">
+            <input name="password" type="password" class="form-control" placeholder="password" required="">
+        </div>
+        <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+
+        <a href="#">
+            <small>Forgot password?</small>
+        </a>
+
+        <p class="text-muted text-center">
+            <small>Do not have an account?</small>
+        </p>
+        <a class="btn btn-sm btn-white btn-block" href="#">Create an account</a>
+        </form>
+        <p class="m-t">
+            <small>Project &copy; 2015</small>
+        </p>
+    </div>
+</div>

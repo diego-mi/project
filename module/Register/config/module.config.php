@@ -1,34 +1,24 @@
 <?php
-namespace Comment;
+namespace Register;
 
 return array(
     'router' => array(
         'routes' => array(
-            'get-comments' => array(
+            'register' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/get-comments',
+                    'route'    => '/register',
                     'defaults' => array(
-                        'controller' => 'Comment\Controller\Index',
+                        'controller' => 'Register\Controller\Index',
                         'action'     => 'index',
                     ),
-                ),
-            ),
-            'add-comment' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/add-comment',
-                    'defaults' => array(
-                        'controller' => 'Comment\Controller\Index',
-                        'action'     => 'addComment',
-                    ),
-                ),
+                )
             ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'Comment\Controller\Index' => 'Comment\Controller\IndexController'
+            'Register\Controller\Index' => 'Register\Controller\IndexController'
         ),
     ),
     'view_manager' => array(

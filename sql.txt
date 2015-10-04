@@ -98,8 +98,58 @@ Inner JOIN friend
 # SQL #
 --- END SEGUIDORES ---
 
-INVERSO
-friendId tem userId
-    user.id                     - seguidor
-    friend.friend_id            - seguido
-    on user.id = friend.user_id // carrego infos de quem
+------------------------------------------------------
+--------------------- TRIGERS ------------------------
+------------------------------------------------------
+
+--- NOTIFICATION ON GOSTEI
+delimiter |
+
+CREATE TRIGGER generate_notification_gostei AFTER INSERT ON gostei
+  FOR EACH ROW
+  BEGIN
+    INSERT INTO notification SET post_id = NEW.post_id, action_author_id = NEW.user_id, action_type = 1;
+  END;
+|
+
+delimiter ;
+
+--- DELETE NOTIFICATION ON DELETE GOSTEI
+delimiter |
+
+CREATE TRIGGER generate_notification_gostei_del AFTER DELETE ON gostei
+  FOR EACH ROW
+  BEGIN
+    DELETE FROM notification WHERE (post_id = OLD.post_id AND action_author_id = OLD.user_id AND action_type = 1);
+  END;
+|
+
+delimiter ;
+
+--- NOTIFICATION ON COMMENT
+delimiter |
+
+CREATE TRIGGER generate_notification_comment AFTER INSERT ON comment
+  FOR EACH ROW
+  BEGIN
+    INSERT INTO notification SET post_id = NEW.post_id, action_author_id = NEW.user_id, action_type = 2;
+  END;
+|
+
+delimiter ;
+
+--- DELETE NOTIFICATION ON DELETE COMMENT
+delimiter |
+
+CREATE TRIGGER generate_notification_comment_del AFTER DELETE ON comment
+  FOR EACH ROW
+  BEGIN
+    DELETE FROM comment WHERE (post_id = OLD.post_id AND action_user_id = OLD.user_id AND action_type = 2);
+  END;
+|
+
+delimiter ;
+
+------------------------------------------------------
+--------------------- TRIGERS ------------------------
+------------------------------------------------------

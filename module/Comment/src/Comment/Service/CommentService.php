@@ -23,9 +23,7 @@ class CommentService extends AbstractService
     {
         $entity = new $this->entity($data);
         $this->em->persist($entity);
-        $this->em->flush();
-
-        return $this->em->getRepository($this->entity)->findBy(array('postId' => $data['postId']));
+        return $this->em->flush();
     }
 
     public function remove(Array $data = array())
@@ -34,8 +32,7 @@ class CommentService extends AbstractService
         if ($entity) {
             $this->em->remove($entity);
             $this->em->flush();
-
-            return '2';
+            return $this->em->flush();
         }
     }
 

@@ -61,5 +61,27 @@ $(document).ready(function () {
             });
         }
     });
+
+
+    $('.comment-infos').on('click', '.comment-link-getcomments', function (event) {
+        event.preventDefault();
+        var postId = $(this).attr('data-postid');
+        var containerComments = $('.comment-container-' + postId);
+        if ($(containerComments).hasClass('opened')) {
+            $(this).removeClass('opened').addClass('open');
+            $(containerComments)
+                .removeClass('opened')
+                .slideUp()
+                .html('<!-- social-comment --><div class="social-comment"><div class="sk-spinner sk-spinner-cube-grid"><div class="sk-cube"></div><div class="sk-cube"></div><div class="sk-cube"></div><div class="sk-cube"></div><div class="sk-cube"></div><div class="sk-cube"></div><div class="sk-cube"></div><div class="sk-cube"></div><div class="sk-cube"></div></div></div><!-- end social-comment -->');
+        } else {
+            $(containerComments).slideDown().addClass('opened');
+            $.post("/get-comments", {postid: postId}, function (data) {
+                $(containerComments).html(data.status);
+            });
+            $(this).removeClass('open').addClass('opened');
+        }
+    });
+
+
 });
 

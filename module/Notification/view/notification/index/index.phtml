@@ -1,0 +1,41 @@
+<?php
+if (!count($this->comments)) {
+    ?>
+    <!-- social-comment -->
+    <div class="social-comment clearfix">
+        <div class="media-body">
+            Este post ainda não tem comentarios.
+        </div>
+    </div>
+    <!-- end social-comment -->
+    <?php
+} else {
+
+    foreach ($this->comments as $comment) { ?>
+        <!-- social-comment -->
+        <div class="social-comment clearfix">
+            <a href="" class="pull-left">
+                <img
+                    alt="image"
+                    src="<?php echo(
+                        $this->basePath() . '/upload/profile/img_' . $comment->getCommentAuthorPicture()
+                    ); ?>"
+                    onerror=
+                    "this.src='<?php echo(
+                        $this->basePath() . '/img/not-found/not-found-picture-post-user-lg.png'
+                    ); ?>'">
+            </a>
+
+            <div class="media-body">
+                <a href="#">
+                    <?php echo($comment->getCommentAuthorName()); ?>
+                </a>
+                <?php echo($comment->getCommentContent()); ?>
+                <br>
+                <small class="text-muted"><?php echo($comment->getCommentDate()); ?></small>
+            </div>
+        </div>
+        <!-- end social-comment -->
+    <?php
+    }
+}

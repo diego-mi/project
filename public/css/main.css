@@ -108,4 +108,16 @@ display: block; }
 .comment-infos {
     margin-bottom: 10px;
 }
+.comment-link-getcomments.open .actionShow {
+    display: inline;
+}
+.comment-link-getcomments.opened .actionShow {
+    display: none;
+}
+.comment-link-getcomments.open .actionHide {
+    display: none;
+}
+.comment-link-getcomments.opened .actionHide {
+    display: inline;
+}
 /*     END FEED       */

@@ -104,6 +104,20 @@ class VwPost extends AbstractEntity
     private $userPicture;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="post_comments_count", type="integer", nullable=true)
+     */
+    private $postCommentsCount;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="post_gostei_count", type="integer", nullable=true)
+     */
+    private $postGosteiCount;
+
+    /**
      * @return int
      */
     public function getPostId()
@@ -301,5 +315,37 @@ class VwPost extends AbstractEntity
     public function setPostGostei($postGostei)
     {
         $this->postGostei = $postGostei;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostCommentsCount()
+    {
+        return $this->postCommentsCount;
+    }
+
+    /**
+     * @param int $postCommentsCount
+     */
+    public function setPostCommentsCount($postCommentsCount)
+    {
+        $this->postCommentsCount = $postCommentsCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostGosteiCount()
+    {
+        return $this->postGosteiCount;
+    }
+
+    /**
+     * @param int $postGosteiCount
+     */
+    public function setPostGosteiCount($postGosteiCount)
+    {
+        $this->postGosteiCount = $postGosteiCount;
     }
 }

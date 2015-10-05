@@ -18,23 +18,30 @@ CREATE TABLE posts
 
 CREATE VIEW vwposts AS
 select
-	posts.id AS post_id,
-	posts.content AS post_content,
-	posts.type AS post_type,
-	posts.date AS post_date,
-	posts.classification AS post_classification,
-	posts.privacity AS post_privacity,
-	posts.picture AS post_picture,
-	user.id AS user_id,
-	user.name AS user_name,
-	user.picture AS user_picture,
-	post_types.name AS post_type_name,
-	post_types.id AS post_type_id
+ posts.id AS post_id,
+ posts.content AS post_content,
+ posts.type AS post_type,
+ posts.date AS post_date,
+ posts.classification AS post_classification,
+ posts.privacity AS post_privacity,
+ posts.picture AS post_picture,
+ user.id AS user_id,
+ user.name AS user_name,
+ user.picture AS user_picture,
+ post_types.name AS post_type_name,
+ post_types.id AS post_type_id,
+ COUNT(comment.id) as post_comments_count,
+ COUNT(gostei.id) as post_gostei_count
 from posts
 inner join user
-	on posts.author_id = user.id
+ on posts.author_id = user.id
 inner join post_types
-	on posts.type = post_types.id
+ on posts.type = post_types.id
+left join comment
+ on posts.id = comment.post_id
+left join gostei
+ on posts.id = gostei.post_id
+GROUP By posts.id
 
 CREATE VIEW vwcomment AS
 select

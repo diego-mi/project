@@ -25,10 +25,17 @@ class Gostei extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="post_id", type="string", length=100, nullable=false)
+     * @ORM\Column(name="post_id", type="integer", nullable=false)
      * @ORM\Id
      */
     private $postId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="post_author_id", type="integer", nullable=false)
+     */
+    private $postAuthorId;
 
     /**
      * @return int
@@ -64,5 +71,19 @@ class Gostei extends AbstractEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getPostAuthorId()
+    {
+        return $this->postAuthorId;
+    }
 
+    /**
+     * @param int $postAuthorId
+     */
+    public function setPostAuthorId($postAuthorId)
+    {
+        $this->postAuthorId = $postAuthorId;
+    }
 }

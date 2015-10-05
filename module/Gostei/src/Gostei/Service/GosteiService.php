@@ -26,6 +26,9 @@ class GosteiService extends AbstractService
         if (count($mixGosteiExistente)) {
             return $this->remove($data);
         }
+        $post = $this->em->getRepository('Post\Entity\Post')->find($data['postId']);
+
+        $data['postAuthorId'] = $post->getAuthorId();
 
         $entity = new $this->entity($data);
         $this->em->persist($entity);

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="comment")
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Post\Entity\CommentRepository")
+ * @ORM\Entity(repositoryClass="Comment\Entity\CommentRepository")
  */
 class Comment extends AbstractEntity
 {
@@ -30,13 +30,12 @@ class Comment extends AbstractEntity
      */
     private $content;
 
-
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="user_id", type="integer", nullable=false)
+     * @ORM\Column(name="date", type="string", nullable=true)
      */
-    private $userId;
+    private $date;
 
     /**
      * @var int
@@ -45,13 +44,19 @@ class Comment extends AbstractEntity
      */
     private $postId;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="post_author_id", type="integer", nullable=false)
+     */
+    private $postAuthorId;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="date", type="string", nullable=true)
+     * @ORM\Column(name="action_author_id", type="integer", nullable=false)
      */
-    private $date;
+    private $actionAuthorId;
 
     /**
      * @return int
@@ -86,19 +91,19 @@ class Comment extends AbstractEntity
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getUserId()
+    public function getDate()
     {
-        return $this->userId;
+        return $this->date;
     }
 
     /**
-     * @param int $userId
+     * @param string $date
      */
-    public function setUserId($userId)
+    public function setDate($date)
     {
-        $this->userId = $userId;
+        $this->date = $date;
     }
 
     /**
@@ -118,21 +123,34 @@ class Comment extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getDate()
+    public function getPostAuthorId()
     {
-        return $this->date;
+        return $this->postAuthorId;
     }
 
     /**
-     * @param string $date
+     * @param int $postAuthorId
      */
-    public function setDate($date)
+    public function setPostAuthorId($postAuthorId)
     {
-        $this->date = $date;
+        $this->postAuthorId = $postAuthorId;
     }
 
+    /**
+     * @return int
+     */
+    public function getActionAuthorId()
+    {
+        return $this->actionAuthorId;
+    }
 
-
+    /**
+     * @param int $actionAuthorId
+     */
+    public function setActionAuthorId($actionAuthorId)
+    {
+        $this->actionAuthorId = $actionAuthorId;
+    }
 }

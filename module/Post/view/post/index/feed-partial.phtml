@@ -66,55 +66,49 @@ if ((isset($this->list)) && (!count($this->list))) {
                 <button class="btn btn-xs btn-gostei <?php echo($getGostei ? 'btn-primary' : 'btn-white'); ?>" data-postid="<?php echo($post->getPostId()); ?>">
                     <i class="fa fa-heart"></i> Gostei
                 </button>
-                <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                <button
+                    class="btn btn-white btn-xs btn-comments"
+                    data-postid="<?php echo($post->getPostid()); ?>">
+                    <i class="fa fa-comments"></i> Comment
+                </button>
                 <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
             </div>
         </div>
         <!-- end social-body -->
         <!-- social-footer -->
-        <div class="social-footer">
+        <div class="social-footer post-comments posts-comments-<?php echo($post->getPostid()); ?>">
+            <!-- social-comment -->
+            <div class="social-comment comment-infos">
+                <a href="">
+                    <small>Ver 10 comentários.. <i class="fa fa-angle-down"></i></small>
+                </a>
+            </div>
+            <!-- end social-comment -->
             <div class="comment-container comment-container-<?php echo($post->getPostid()); ?>">
                 <!-- social-comment -->
                 <div class="social-comment">
-                    <a href="" class="pull-left">
-                        <img alt="image" src="<?php echo($this->basePath() . '/'); ?>img/a1.jpg">
-                    </a>
-
-                    <div class="media-body">
-                        <a href="#">
-                            Andrew Williams
-                        </a>
-                        Internet tend to repeat predefined chunks as necessary, making this the first true generator on
-                        the
-                        Internet. It uses a dictionary of over 200 Latin words.
-                        <br>
-                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
-                        <small class="text-muted">12.06.2014</small>
-                    </div>
-                </div>
-                <!-- end social-comment -->
-                <!-- social-comment -->
-                <div class="social-comment">
-                    <a href="" class="pull-left">
-                        <img alt="image" src="<?php echo($this->basePath() . '/'); ?>img/a2.jpg">
-                    </a>
-
-                    <div class="media-body">
-                        <a href="#">
-                            Andrew Williams
-                        </a>
-                        Making this the first true generator on the Internet. It uses a dictionary of.
-                        <br>
-                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
-                        <small class="text-muted">10.07.2014</small>
+                    <div class="sk-spinner sk-spinner-cube-grid">
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
+                        <div class="sk-cube"></div>
                     </div>
                 </div>
                 <!-- end social-comment -->
             </div>
             <!-- social-comment -->
-            <div class="social-comment">
+            <div class="social-comment comment-add">
                 <a href="" class="pull-left">
-                    <img alt="image" src="<?php echo($this->basePath() . '/'); ?>img/a3.jpg">
+                    <img
+                        alt="<?php echo($this->identity()->getName()); ?>"
+                        title="<?php echo($this->identity()->getName()); ?>"
+                        src="<?php echo($this->basePath() . '/upload/profile/img_' . $this->identity()->getPicture()); ?>"
+                        onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user-lg.png'); ?>'">
                 </a>
 
                 <div class="media-body">

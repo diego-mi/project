@@ -21,11 +21,12 @@ class CommentService extends AbstractService
      */
     public function comment($data)
     {
+        $post = $this->em->getRepository('Post\Entity\Post')->find($data['postId']);
+
+        $data['postAuthorId'] = $post->getAuthorId();
         $entity = new $this->entity($data);
         $this->em->persist($entity);
-        $this->em->flush();
-
-        return '1';
+        return $this->em->flush();
     }
 
     public function remove(Array $data = array())
@@ -34,8 +35,7 @@ class CommentService extends AbstractService
         if ($entity) {
             $this->em->remove($entity);
             $this->em->flush();
-
-            return '2';
+            return $this->em->flush();
         }
     }
 

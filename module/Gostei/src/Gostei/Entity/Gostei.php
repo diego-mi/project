@@ -17,34 +17,40 @@ class Gostei extends AbstractEntity
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id", type="integer", nullable=false)
+     * @ORM\Column(name="action_author_id", type="integer", nullable=false)
      * @ORM\Id
      */
-    private $userId;
+    private $actionAuthorId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="post_id", type="string", length=100, nullable=false)
+     * @ORM\Column(name="post_id", type="integer", nullable=false)
      * @ORM\Id
      */
     private $postId;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="post_author_id", type="integer", nullable=false)
+     */
+    private $postAuthorId;
+
+    /**
      * @return int
      */
-    public function getUserId()
+    public function getActionAuthorId()
     {
-        return $this->userId;
+        return $this->actionAuthorId;
     }
 
     /**
-     * @param int $userId
+     * @param int $actionAuthorId
      */
-    public function setUserId($userId)
+    public function setActionAuthorId($actionAuthorId)
     {
-        $this->userId = $userId;
-        return $this;
+        $this->actionAuthorId = $actionAuthorId;
     }
 
     /**
@@ -64,5 +70,19 @@ class Gostei extends AbstractEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getPostAuthorId()
+    {
+        return $this->postAuthorId;
+    }
 
+    /**
+     * @param int $postAuthorId
+     */
+    public function setPostAuthorId($postAuthorId)
+    {
+        $this->postAuthorId = $postAuthorId;
+    }
 }

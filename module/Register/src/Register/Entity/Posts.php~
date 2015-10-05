@@ -1,0 +1,50 @@
+<?php
+
+namespace Post\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Posts
+ *
+ * @ORM\Table(name="posts", indexes={@ORM\Index(name="posts", columns={"author_id"})})
+ * @ORM\Entity
+ */
+class Posts
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=true)
+     */
+    private $content;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer", nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var \Post\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Post\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     * })
+     */
+    private $author;
+
+
+}
+

@@ -24,15 +24,52 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
+        $post = $this->getRequest()->getPost()->toArray();
+        $htmlOutput = $this->getHtmlComments($post['postid']);
+
+        return new JsonModel(array('status' => $htmlOutput));
+    }
+
+
+    /**
+     * Funcao responsavel por adicionar um novo comentario e retornar todos os comentarios
+     * daquele post em html
+     *
+     * @return JsonModel
+     */
+    public function addCommentAction()
+    {
         $data = array();
         $post = $this->getRequest()->getPost()->toArray();
         $data['postId'] = $post['postid'];
         $data['content'] = $post['content'];
-        $data['userId'] = $this->identity()->getId();
+        $data['actionAuthorId'] = $this->identity()->getId();
         $service = $this->getServiceLocator()->get($this->service);
+        $service->comment($data);
 
-        $result = $service->comment($data);
-        return new JsonModel(array('status' => $result));
+        $htmlOutput = $this->getHtmlComments($post['postid']);
+
+        return new JsonModel(array('status' => $htmlOutput));
     }
 
+    /**
+     * Funcao responsavel por criar o html de comentarios
+     *
+     * @param array $arrComments Entities de comentarios
+     * @return mixed
+     */
+    private function getHtmlComments($intPostid)
+    {
+        $comments = $this->getEm()
+            ->getRepository('Comment\Entity\VwComment')
+            ->findBy(array('commentPostId' => $intPostid));
+        $htmlViewPart = new ViewModel();
+        $htmlViewPart->setTerminal(true)
+            ->setTemplate('comment/index/index')
+            ->setVariables(array('comments' => $comments));
+
+        return $this->getServiceLocator()
+            ->get('viewrenderer')
+            ->render($htmlViewPart);
+    }
 }

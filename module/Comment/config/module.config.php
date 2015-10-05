@@ -4,13 +4,23 @@ namespace Comment;
 return array(
     'router' => array(
         'routes' => array(
-            'comment' => array(
+            'get-comments' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/comment',
+                    'route'    => '/get-comments',
                     'defaults' => array(
                         'controller' => 'Comment\Controller\Index',
                         'action'     => 'index',
+                    ),
+                ),
+            ),
+            'add-comment' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/add-comment',
+                    'defaults' => array(
+                        'controller' => 'Comment\Controller\Index',
+                        'action'     => 'addComment',
                     ),
                 ),
             ),

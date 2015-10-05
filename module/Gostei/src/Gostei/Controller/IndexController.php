@@ -27,7 +27,7 @@ class IndexController extends AbstractController
         $data = array();
         $post = $this->getRequest()->getPost()->toArray();
         $data['postId'] = $post['postid'];
-        $data['userId'] = $this->identity()->getId();
+        $data['actionAuthorId'] = $this->identity()->getId();
         $service = $this->getServiceLocator()->get($this->service);
 
         $result = $service->gostei($data);

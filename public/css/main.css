@@ -92,3 +92,20 @@ display: block; }
     height: 48px;
 }
 /*     MENU USER       */
+
+/*     BEGIN FEED       */
+.comment-container {
+    display: none;
+    margin-bottom: 15px;
+}
+.comment-add {
+    margin-top: 0px;
+}
+
+.comment-add .input-comment {
+    height: 34px;
+}
+.comment-infos {
+    margin-bottom: 10px;
+}
+/*     END FEED       */

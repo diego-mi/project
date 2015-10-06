@@ -6,5 +6,7 @@
       <option name="CODING_STANDARD" value="PSR2" />
       <option name="WARNING_HIGHLIGHT_LEVEL_NAME" value="ERROR" />
     </inspection_tool>
+    <inspection_tool class="SqlDialectInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SqlNoDataSourceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
   </profile>
 </component>

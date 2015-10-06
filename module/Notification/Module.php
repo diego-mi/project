@@ -1,7 +1,7 @@
 <?php
-namespace Comment;
+namespace Notification;
 
-use Comment\Service\CommentService;
+use Notification\Service\NotificationService;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -34,8 +34,8 @@ class Module
     {
         return array(
             'factories' => array(
-                'Comment\Service\CommentService' => function($em){
-                    return new CommentService($em->get('Doctrine\ORM\EntityManager'));
+                'Notification\Service\NotificationService' => function($em){
+                    return new NotificationService($em->get('Doctrine\ORM\EntityManager'));
                 },
             )
         );

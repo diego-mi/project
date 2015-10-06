@@ -1,41 +1,44 @@
 <?php
-if (!count($this->comments)) {
+if (!count($this->notifications)) {
     ?>
-    <!-- social-comment -->
-    <div class="social-comment clearfix">
-        <div class="media-body">
-            Este post ainda não tem comentarios.
+    <li>
+        <div class="text-center link-block">
+            <span>Sem novas notificações.</span>
         </div>
-    </div>
-    <!-- end social-comment -->
+    </li>
+    <li class="divider"></li>
     <?php
 } else {
 
-    foreach ($this->comments as $comment) { ?>
-        <!-- social-comment -->
-        <div class="social-comment clearfix">
-            <a href="" class="pull-left">
-                <img
-                    alt="image"
-                    src="<?php echo(
-                        $this->basePath() . '/upload/profile/img_' . $comment->getCommentAuthorPicture()
-                    ); ?>"
-                    onerror=
-                    "this.src='<?php echo(
-                        $this->basePath() . '/img/not-found/not-found-picture-post-user-lg.png'
-                    ); ?>'">
-            </a>
-
-            <div class="media-body">
-                <a href="#">
-                    <?php echo($comment->getCommentAuthorName()); ?>
+    foreach ($this->notifications as $notification) { ?>
+        <li class="clearfix">
+            <div class="dropdown-messages-box">
+                <a href="#" class="pull-left">
+                    <img alt="image" class="img-circle"
+                         src="<?php echo(
+                             $this->basePath() . '/upload/profile/img_' . $notification->getNotificationAuthorPicture()
+                         ); ?>"
+                         onerror=
+                         "this.src='<?php echo(
+                             $this->basePath() . '/img/not-found/not-found-picture-post-user-lg.png'
+                         ); ?>'">
                 </a>
-                <?php echo($comment->getCommentContent()); ?>
-                <br>
-                <small class="text-muted"><?php echo($comment->getCommentDate()); ?></small>
+
+                <div class="media-body ">
+                    <strong><?php echo($notification->getNotificationAuthorName()); ?></strong> curtiu seu <strong>post</strong>. <br>
+                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                </div>
             </div>
-        </div>
-        <!-- end social-comment -->
-    <?php
+        </li>
+        <li class="divider"></li>
+        <?php
     }
 }
+?>
+<li>
+    <div class="text-center link-block">
+        <a href="mailbox.html">
+            <i class="fa fa-envelope"></i> <strong>Veja todas as notificações</strong>
+        </a>
+    </div>
+</li>

@@ -1,5 +1,5 @@
 <?php
-namespace Comment\Controller;
+namespace Notification\Controller;
 
 use Base\Controller\AbstractController;
 use Zend\View\Model\JsonModel;
@@ -13,10 +13,10 @@ class IndexController extends AbstractController
      */
     function __construct()
     {
-        $this->controller = 'Comment';
-        $this->route = 'comment/default';
-        $this->service = 'Comment\Service\CommentService';
-        $this->entity = 'Comment\Entity\Comment';
+        $this->controller = 'Notification';
+        $this->route = 'notification/default';
+        $this->service = 'Notification\Service\NotificationService';
+        $this->entity = 'Notification\Entity\Notification';
     }
 
     /**
@@ -24,30 +24,7 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $post = $this->getRequest()->getPost()->toArray();
-        $htmlOutput = $this->getHtmlComments($post['postid']);
-
-        return new JsonModel(array('status' => $htmlOutput));
-    }
-
-
-    /**
-     * Funcao responsavel por adicionar um novo comentario e retornar todos os comentarios
-     * daquele post em html
-     *
-     * @return JsonModel
-     */
-    public function addCommentAction()
-    {
-        $data = array();
-        $post = $this->getRequest()->getPost()->toArray();
-        $data['postId'] = $post['postid'];
-        $data['content'] = $post['content'];
-        $data['actionAuthorId'] = $this->identity()->getId();
-        $service = $this->getServiceLocator()->get($this->service);
-        $service->comment($data);
-
-        $htmlOutput = $this->getHtmlComments($post['postid']);
+        $htmlOutput = $this->getHtmlComments();
 
         return new JsonModel(array('status' => $htmlOutput));
     }
@@ -58,15 +35,23 @@ class IndexController extends AbstractController
      * @param array $arrComments Entities de comentarios
      * @return mixed
      */
-    private function getHtmlComments($intPostid)
+    private function getHtmlComments()
     {
-        $comments = $this->getEm()
-            ->getRepository('Comment\Entity\VwComment')
-            ->findBy(array('commentPostId' => $intPostid));
+        $notifications = $this->getEm()
+            ->getRepository('Notification\Entity\VwNotification')
+            ->findBy(
+                array(
+                    'notificationPostAuthorId' => $this->identity()->getId(),
+                ),
+                array(
+                    'notificationDate' => "DESC"
+                ),
+                4
+            );
         $htmlViewPart = new ViewModel();
         $htmlViewPart->setTerminal(true)
-            ->setTemplate('comment/index/index')
-            ->setVariables(array('comments' => $comments));
+            ->setTemplate('notification/index/index')
+            ->setVariables(array('notifications' => $notifications));
 
         return $this->getServiceLocator()
             ->get('viewrenderer')

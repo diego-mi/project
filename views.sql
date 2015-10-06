@@ -30,3 +30,22 @@ GROUP By posts.id
 
 ----------------- VWPOSTS ---------------------------
 -----------------------------------------------------
+
+-----------------------------------------------------
+-------------- VWNOTIFICATION -----------------------
+
+CREATE VIEW vwnotification AS
+select
+	notification.id as notification_id,
+	notification.date as notification_date,
+	notification.post_id as notification_post_id,
+	notification.post_author_id as notification_post_author_id,
+	user.id as notification_author_id,
+	user.name as notification_author_name,
+	user.picture as notification_author_picture
+from notification
+inner join user
+	on user.id = notification.action_author_id
+
+-------------- VWNOTIFICATION -----------------------
+-----------------------------------------------------

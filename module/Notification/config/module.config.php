@@ -1,26 +1,16 @@
 <?php
-namespace Comment;
+namespace Notification;
 
 return array(
     'router' => array(
         'routes' => array(
-            'get-comments' => array(
+            'get-notifications' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/get-comments',
+                    'route'    => '/get-notifications',
                     'defaults' => array(
-                        'controller' => 'Comment\Controller\Index',
+                        'controller' => 'Notification\Controller\Index',
                         'action'     => 'index',
-                    ),
-                ),
-            ),
-            'add-comment' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/add-comment',
-                    'defaults' => array(
-                        'controller' => 'Comment\Controller\Index',
-                        'action'     => 'addComment',
                     ),
                 ),
             ),
@@ -28,7 +18,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Comment\Controller\Index' => 'Comment\Controller\IndexController'
+            'Notification\Controller\Index' => 'Notification\Controller\IndexController'
         ),
     ),
     'view_manager' => array(

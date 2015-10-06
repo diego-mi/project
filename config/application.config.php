@@ -10,7 +10,8 @@ return array(
         'Profile',
         'Friend',
         'Gostei',
-        'Comment'
+        'Comment',
+        'Notification'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

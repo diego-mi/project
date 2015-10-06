@@ -33,6 +33,13 @@ class VwNotification extends AbstractEntity
     /**
      * @var int
      *
+     * @ORM\Column(name="notification_status", type="integer", nullable=true)
+     */
+    private $notificationStatus;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="notification_post_id", type="integer", nullable=true)
      */
     private $notificationPostId;
@@ -66,6 +73,13 @@ class VwNotification extends AbstractEntity
     private $notificationAuthorPicture;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="notification_action_output", type="string", nullable=true)
+     */
+    private $notificationActionOutput;
+
+    /**
      * @return int
      */
     public function getNotificationId()
@@ -95,6 +109,22 @@ class VwNotification extends AbstractEntity
     public function setNotificationDate($notificationDate)
     {
         $this->notificationDate = $notificationDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNotificationStatus()
+    {
+        return $this->notificationStatus;
+    }
+
+    /**
+     * @param int $notificationStatus
+     */
+    public function setNotificationStatus($notificationStatus)
+    {
+        $this->notificationStatus = $notificationStatus;
     }
 
     /**
@@ -175,5 +205,21 @@ class VwNotification extends AbstractEntity
     public function setNotificationAuthorPicture($notificationAuthorPicture)
     {
         $this->notificationAuthorPicture = $notificationAuthorPicture;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotificationActionOutput()
+    {
+        return $this->notificationActionOutput;
+    }
+
+    /**
+     * @param string $notificationActionOutput
+     */
+    public function setNotificationActionOutput($notificationActionOutput)
+    {
+        $this->notificationActionOutput = $notificationActionOutput;
     }
 }

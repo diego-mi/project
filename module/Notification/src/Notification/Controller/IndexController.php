@@ -39,15 +39,7 @@ class IndexController extends AbstractController
     {
         $notifications = $this->getEm()
             ->getRepository('Notification\Entity\VwNotification')
-            ->findBy(
-                array(
-                    'notificationPostAuthorId' => $this->identity()->getId(),
-                ),
-                array(
-                    'notificationDate' => "DESC"
-                ),
-                4
-            );
+            ->getNewNotifications($this->identity()->getId());
         $htmlViewPart = new ViewModel();
         $htmlViewPart->setTerminal(true)
             ->setTemplate('notification/index/index')
@@ -56,5 +48,14 @@ class IndexController extends AbstractController
         return $this->getServiceLocator()
             ->get('viewrenderer')
             ->render($htmlViewPart);
+    }
+
+    public function setNotificationToOldAction()
+    {
+        $post = $this->getRequest()->getPost()->toArray();
+        $intNotificationId = $post['notificationId'];
+        $service = $this->getServiceLocator()->get($this->service);
+        $returnAction = $service->setNotificationToOld($intNotificationId);
+        return new JsonModel(array('status' => $returnAction));
     }
 }

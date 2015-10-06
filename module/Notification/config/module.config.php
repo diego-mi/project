@@ -14,6 +14,16 @@ return array(
                     ),
                 ),
             ),
+            'set-notification-to-old' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/set-notification-to-old',
+                    'defaults' => array(
+                        'controller' => 'Notification\Controller\Index',
+                        'action'     => 'setNotificationToOld',
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(

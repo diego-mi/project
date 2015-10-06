@@ -121,3 +121,19 @@ display: block; }
     display: inline;
 }
 /*     END FEED       */
+
+/*     BEGIN NOTIFICATION       */
+.notification-item {}
+
+.notification-item-userPicture {
+
+}
+.notification-item-userProfile-link {
+    padding: 0 !important;
+    font-size: 12px !important;
+}
+.notification-item-post-link {
+    padding: 0 !important;
+    font-size: 12px !important;
+}
+/*     END NOTIFICATION       */

@@ -38,14 +38,18 @@ CREATE VIEW vwnotification AS
 select
 	notification.id as notification_id,
 	notification.date as notification_date,
+	notification.status as notification_status,
 	notification.post_id as notification_post_id,
 	notification.post_author_id as notification_post_author_id,
 	user.id as notification_author_id,
 	user.name as notification_author_name,
-	user.picture as notification_author_picture
+	user.picture as notification_author_picture,
+	notifications_types.output as notification_action_output
 from notification
 inner join user
 	on user.id = notification.action_author_id
+inner join notifications_types
+	on notification.action_id = notifications_types.id
 
 -------------- VWNOTIFICATION -----------------------
 -----------------------------------------------------

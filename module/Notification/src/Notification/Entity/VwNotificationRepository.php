@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class VwNotificationRepository extends EntityRepository
 {
+    public function getNewNotifications($intUserId)
+    {
+        $query = $this->_em->createQuery(
+            'SELECT u FROM Notification\Entity\VwNotification u
+            WHERE u.notificationPostAuthorId = ' . $intUserId . '
+            AND u.notificationAuthorId <> ' . $intUserId . '
+            AND u.notificationStatus = 0
+            ORDER BY u.notificationDate DESC'
+        );
+
+        return $query->getResult();
+    }
 }

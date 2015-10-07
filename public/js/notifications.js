@@ -1,7 +1,13 @@
 $(document).ready(function () {
 
     $.post("/get-notifications", function (data) {
-        $(".notifications-layout").html(data.status);
+        $(".notifications-layout").html(data.html);
+        if (data.count) {
+            $('.notifications-label').html(data.count).show();
+        } else {
+            $('.notifications-label').html('').hide();
+        }
+
     });
 
 
@@ -10,7 +16,6 @@ $(document).ready(function () {
             var notificationId = $(this).attr('data-notificationid');
             var notificationLi = $(this);
             $.post("/set-notification-to-old", {notificationId: notificationId}, function (data) {
-                console.log(data.status);
                 if (data.status) {
                     $(notificationLi).removeClass('notification-new');
                 }

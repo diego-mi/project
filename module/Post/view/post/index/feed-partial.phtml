@@ -80,7 +80,13 @@ if ((isset($this->list)) && (!count($this->list))) {
             <!-- social-comment -->
             <div class="social-comment comment-infos">
                 <a href="#" class="comment-link-getcomments open" data-postid="<?php echo($post->getPostId()); ?>">
-                    <small><span class="actionShow">Ver</span><span class="actionHide">Ocultar</span> <?php echo($post->getPostCommentsCount()) ?> comentários.. <i class="fa fa-angle-down"></i></small>
+                    <small>
+                        <span class="actionShow">Ver</span>
+                        <span class="actionHide">Ocultar</span>
+                        <?php echo($post->getPostCommentsCount()) ?> comentários...
+                        <i class="fa fa-angle-down actionShow"></i>
+                        <i class="fa fa-angle-up actionHide"></i>
+                    </small>
                 </a>
             </div>
             <!-- end social-comment -->

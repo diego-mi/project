@@ -26,7 +26,7 @@ class IndexController extends AbstractController
     {
         $htmlOutput = $this->getHtmlComments();
 
-        return new JsonModel(array('status' => $htmlOutput));
+        return new JsonModel(array('html' => $htmlOutput['html'], 'count' => $htmlOutput['count']));
     }
 
     /**
@@ -45,9 +45,11 @@ class IndexController extends AbstractController
             ->setTemplate('notification/index/index')
             ->setVariables(array('notifications' => $notifications));
 
-        return $this->getServiceLocator()
+        $notificationsHtml = $this->getServiceLocator()
             ->get('viewrenderer')
             ->render($htmlViewPart);
+
+        return array('html' => $notificationsHtml, 'count' => count($notifications));
     }
 
     public function setNotificationToOldAction()
@@ -56,6 +58,6 @@ class IndexController extends AbstractController
         $intNotificationId = $post['notificationId'];
         $service = $this->getServiceLocator()->get($this->service);
         $returnAction = $service->setNotificationToOld($intNotificationId);
-        return new JsonModel(array('status' => $returnAction));
+        return new JsonModel(array('html' => $returnAction));
     }
 }

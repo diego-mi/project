@@ -1,132 +1,138 @@
-
-<div class="row m-b-lg">
-    <div class="capa-profile">
-        <img src="https://catrangers.files.wordpress.com/2012/07/17.jpg" alt=""/>
-    </div>
+<div class="row border-bottom white-bg dashboard-header profile-cover"
+     style="background-image: url(https://catrangers.files.wordpress.com/2012/07/17.jpg)">
 </div>
 
+<!-- begin content -->
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <!-- begin content -->
 
-<div class="col-lg-7 col-lg-offset-1">
-    <?php
-    echo($this->partial('post/index/feed-partial', array('list' => $list, 'gostei' => $this->gostei)));
-    ?>
-</div>
-<!-- end col-lg-9-->
-
-
-<div class="col-lg-3">
-
-    <div class="m-b">
-        <div class="widget-head-color-box navy-bg p-lg text-center">
-            <div class="m-b-md">
-                <h2 class="font-bold no-margins">
-                    <?php echo($this->profile->getName()); ?>
-                </h2>
-                <small>Founder of Groupeq</small>
-            </div>
-            <img
-                onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user-lg.png'); ?>'"
-                src="<?php echo($this->basePath() . '/upload/profile/img_' . $this->profile->getPicture()); ?>"
-                 class="img-circle circle-border m-b-md img-responsive" alt="profile">
-            <div>
-                <span>100 Tweets</span> |
-                <span>350 Following</span> |
-                <span>610 Followers</span>
-            </div>
+        <div class="col-lg-7 col-lg-offset-1">
+            <?php
+            echo($this->partial('post/index/feed-partial', array('list' => $list, 'gostei' => $this->gostei)));
+            ?>
         </div>
-        <div class="widget-text-box">
-            <h4 class="media-heading text-center">@<?php echo($this->profile->getUSername()); ?></h4>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-            <div class="friend-div-btns">
-                <?php
-                if ($this->isFollowing) {
-                    ?>
-                    <button
-                        class="btn btn-sm btn-primary friend-btn-add"
-                        data-friendid="<?php echo($this->profile->getId()); ?>"
-                        title="Click para deixar de seguir...">
-                        <i class="fa fa-check friend-i-seguir"></i> <span class="friend-span-seguir">Seguindo</span>
-                    </button>
-                <?php
-                } else {
-                    ?>
-                    <button
-                        class="btn btn-sm btn-white friend-btn-add"
-                        data-friendid="<?php echo($this->profile->getId()); ?>"
-                        title="Click para seguir...">
-                        <i class="fa fa-plus friend-i-seguir"></i> <span class="friend-span-seguir">Seguir</span>
-                    </button>
-                <?php
-                }
-                ?>
-            </div>
-        </div>
-    </div>
+        <!-- end col-lg-9-->
 
-    <div class="clearfix"></div>
-    <?php
-    if ((isset($this->friends)) && (count($this->friends))) { ?>
-        <div class="ibox">
-            <div class="ibox-content">
-                <h3>Followers and friends</h3>
 
-                <p class="small">
-                    If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
-                    anything embarrassing
-                </p>
+        <div class="col-lg-3">
 
-                <div class="user-friends">
-                    <?php
-                    foreach ($this->friends as $friend)
-                    ?>
-                    <a href="<?php echo($this->url('profile') . '/' . $friend->getFollowingId()); ?>"
-                        title="<?php echo($friend->getFollowingName()); ?>">
-                        <img
-                            onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user.png'); ?>'"
-                            alt="image"
-                            class="img-circle"
-                            src="<?php echo($this->basePath() . '/upload/profile/img_' . $friend->getFollowingPicture());?>">
-                    </a>
+            <div class="m-b">
+                <div class="widget-head-color-box navy-bg p-lg text-center">
+                    <div class="m-b-md">
+                        <h2 class="font-bold no-margins">
+                            <?php echo($this->profile->getName()); ?>
+                        </h2>
+                        <small>Founder of Groupeq</small>
+                    </div>
+                    <img
+                        onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user-lg.png'); ?>'"
+                        src="<?php echo($this->basePath() . '/upload/profile/img_' . $this->profile->getPicture()); ?>"
+                         class="img-circle circle-border m-b-md img-responsive" alt="profile">
+                    <div>
+                        <span>100 Tweets</span> |
+                        <span>350 Following</span> |
+                        <span>610 Followers</span>
+                    </div>
+                </div>
+                <div class="widget-text-box">
+                    <h4 class="media-heading text-center">@<?php echo($this->profile->getUSername()); ?></h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <div class="friend-div-btns">
+                        <?php
+                        if ($this->isFollowing) {
+                            ?>
+                            <button
+                                class="btn btn-sm btn-primary friend-btn-add"
+                                data-friendid="<?php echo($this->profile->getId()); ?>"
+                                title="Click para deixar de seguir...">
+                                <i class="fa fa-check friend-i-seguir"></i> <span class="friend-span-seguir">Seguindo</span>
+                            </button>
+                        <?php
+                        } else {
+                            ?>
+                            <button
+                                class="btn btn-sm btn-white friend-btn-add"
+                                data-friendid="<?php echo($this->profile->getId()); ?>"
+                                title="Click para seguir...">
+                                <i class="fa fa-plus friend-i-seguir"></i> <span class="friend-span-seguir">Seguir</span>
+                            </button>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <?php
-    }
-    ?>
 
-    <div class="ibox">
-        <div class="ibox-content">
-            <h3>Personal friends</h3>
-            <ul class="list-unstyled file-list">
-                <li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>
-                <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
-                <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
-                <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>
-                <li><a href=""><i class="fa fa-file-powerpoint-o"></i> Presentation.pptx</a></li>
-                <li><a href=""><i class="fa fa-file"></i> 10_08_2015.docx</a></li>
-            </ul>
-        </div>
-    </div>
+            <div class="clearfix"></div>
+            <?php
+            if ((isset($this->friends)) && (count($this->friends))) { ?>
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h3>Followers and friends</h3>
 
-    <div class="ibox">
-        <div class="ibox-content">
-            <h3>Private message</h3>
+                        <p class="small">
+                            If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                            anything embarrassing
+                        </p>
 
-            <p class="small">
-                Send private message to Alex Smith
-            </p>
+                        <div class="user-friends">
+                            <?php
+                            foreach ($this->friends as $friend)
+                            ?>
+                            <a href="<?php echo($this->url('profile') . '/' . $friend->getFollowingId()); ?>"
+                                title="<?php echo($friend->getFollowingName()); ?>">
+                                <img
+                                    onerror="this.src='<?php echo($this->basePath() . '/img/not-found/not-found-picture-post-user.png'); ?>'"
+                                    alt="image"
+                                    class="img-circle"
+                                    src="<?php echo($this->basePath() . '/upload/profile/img_' . $friend->getFollowingPicture());?>">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
 
-            <div class="form-group">
-                <label>Subject</label>
-                <input type="email" class="form-control" placeholder="Message subject">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Personal friends</h3>
+                    <ul class="list-unstyled file-list">
+                        <li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>
+                        <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
+                        <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
+                        <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>
+                        <li><a href=""><i class="fa fa-file-powerpoint-o"></i> Presentation.pptx</a></li>
+                        <li><a href=""><i class="fa fa-file"></i> 10_08_2015.docx</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Message</label>
-                <textarea class="form-control" placeholder="Your message" rows="3"></textarea>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Private message</h3>
+
+                    <p class="small">
+                        Send private message to Alex Smith
+                    </p>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="email" class="form-control" placeholder="Message subject">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea class="form-control" placeholder="Your message" rows="3"></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-block">Send</button>
+
+                </div>
             </div>
-            <button class="btn btn-primary btn-block">Send</button>
 
         </div>
-    </div>
 
+    <!-- end content -->
+    </div>
 </div>
+<!-- end content -->

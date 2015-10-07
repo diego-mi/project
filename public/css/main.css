@@ -73,12 +73,13 @@ display: block; }
 
 
 /*     CAPA PROFILE       */
-.capa-profile {
-
-}
-.capa-profile img {
-    width: 100%;
-    max-height: 400px;
+.profile-cover {
+    padding: 0 !important;
+    height: 350px;
+    background-image: url(https://catrangers.files.wordpress.com/2012/07/17.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 /*     END CAPA PROFILE       */
 

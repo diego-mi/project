@@ -20,8 +20,13 @@ $form->setAttribute('class', 'social-feed-box clear postar active');
 $form->prepare();
 
 ?>
-<!-- postar -->
-    <?php echo $this->form()->openTag($form); ?>
+<!-- begin content -->
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <!-- begin content -->
+
+        <!-- postar -->
+        <?php echo $this->form()->openTag($form); ?>
 
         <div class="social-body clearfix">
 
@@ -47,6 +52,7 @@ $form->prepare();
             <div class="row postar-itens-tipo postar-foto">
                 <div class="form-group clearfix">
                     <label class="control-label col-sm-2">Foto:</label>
+
                     <div class="col-sm-10">
                         <?php
                         $picture = $form->get('picture');
@@ -72,6 +78,7 @@ $form->prepare();
                 <div class="collapse" id="collapseExample">
                     <div class="form-group postar-privacidade">
                         <label for="inputPassword3" class="col-sm-2 control-label">Privacidade</label>
+
                         <div class="col-sm-10">
                             <div class="radio radio-info radio-inline">
                                 <input type="radio" id="privacidade1" value="1" name="privacity" checked="">
@@ -86,6 +93,7 @@ $form->prepare();
 
                     <div class="form-group postar-privacidade">
                         <label for="inputPassword3" class="col-sm-2 control-label">Classificação</label>
+
                         <div class="col-sm-10">
                             <div class="radio radio-info radio-inline">
                                 <input type="radio" id="classification1" value="1" name="classification" checked="">
@@ -110,8 +118,12 @@ $form->prepare();
                 </button>
             </div>
         </div>
-    </form>
+        </form>
 
-<div class="clearfix"></div>
-<!-- end postar -->
+        <div class="clearfix"></div>
+        <!-- end postar -->
 
+        <!-- end content -->
+    </div>
+</div>
+<!-- end content -->

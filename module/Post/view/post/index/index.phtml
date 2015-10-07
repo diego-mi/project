@@ -1,10 +1,22 @@
-<div class="col-lg-7 col-lg-offset-2">
-    <?php
-    echo($this->partial('post/index/inserir-partial', array()));
-    ?>
+<!-- begin content -->
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <!-- begin content -->
 
-    <?php
-    echo($this->partial('post/index/feed-partial', array('list' => $list, 'gostei' => $this->gostei)));
-    ?>
-<div
-    <script defer src="<?php echo($this->basePath() . '/'); ?>js/feed.js"></script>
+
+        <div class="col-lg-7 col-lg-offset-2">
+            <?php
+            echo($this->partial('post/index/inserir-partial', array()));
+            ?>
+
+            <?php
+            echo($this->partial('post/index/feed-partial', array('list' => $list, 'gostei' => $this->gostei)));
+            ?>
+        <div
+        <script defer src="<?php echo($this->basePath() . '/'); ?>js/feed.js"></script>
+
+
+        <!-- end content -->
+    </div>
+</div>
+<!-- end content -->

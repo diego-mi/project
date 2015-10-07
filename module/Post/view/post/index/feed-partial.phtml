@@ -26,7 +26,7 @@ if ((isset($this->list)) && (!count($this->list))) {
                 <i class="fa fa-angle-down"></i>
             </button>
             <ul class="dropdown-menu m-t-xs">
-                <li><a href="#">Config</a></li>
+                <li><a href="<?php echo($this->url('post') . '/view/' . $post->getPostId()); ?>">Visualizar</a></li>
             </ul>
         </div>
         <!-- end social-action -->
@@ -63,8 +63,13 @@ if ((isset($this->list)) && (!count($this->list))) {
             }
             ?>
             <div class="btn-group post-btn-actions">
-                <button class="btn btn-xs btn-gostei <?php echo($getGostei ? 'btn-primary' : 'btn-white'); ?>" data-postid="<?php echo($post->getPostId()); ?>">
-                    <i class="fa fa-heart"></i> Gostei (<?php echo($post->getPostGosteiCount()) ?>)
+                <button
+                    class="btn btn-xs btn-gostei <?php echo($getGostei ? 'btn-primary' : 'btn-white'); ?>"
+                    data-postid="<?php echo($post->getPostId()); ?>">
+                    <i class="fa fa-heart"></i> Gostei
+                    <span class="btn-gostei-span-count-<?php echo($post->getPostId()); ?>">
+                        (<?php echo($post->getPostGosteiCount()) ?>)
+                    </span>
                 </button>
                 <!--<button
                     class="btn btn-white btn-xs btn-comments"
@@ -83,7 +88,10 @@ if ((isset($this->list)) && (!count($this->list))) {
                     <small>
                         <span class="actionShow">Ver</span>
                         <span class="actionHide">Ocultar</span>
-                        <?php echo($post->getPostCommentsCount()) ?> comentários...
+                        <span class="comment-link-getcomments-count-<?php echo($post->getPostId()); ?>">
+                            <?php echo($post->getPostCommentsCount()) ?>
+                        </span>
+                        comentários...
                         <i class="fa fa-angle-down actionShow"></i>
                         <i class="fa fa-angle-up actionHide"></i>
                     </small>

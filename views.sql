@@ -53,3 +53,41 @@ inner join notifications_types
 
 -------------- VWNOTIFICATION -----------------------
 -----------------------------------------------------
+
+-----------------------------------------------------
+----------------- VWFOLLOWING -----------------------
+
+CREATE VIEW following AS
+select
+	friend.user_id AS follower_id,
+	user.id AS following_id,
+    user.name AS following_name,
+    user.username AS following_username,
+    user.picture AS following_picture,
+    user.email AS following_email
+FROM user
+LEFT JOIN friend
+	on user.id = friend.friend_id
+GROUP BY following_id
+
+----------------- VWFOLLOWING -----------------------
+-----------------------------------------------------
+
+-----------------------------------------------------
+----------------- VWFOLLOWERS -----------------------
+
+CREATE VIEW followers AS
+select
+	friend.friend_id AS following_id,
+	user.id AS follower_id,
+    user.name AS follower_name,
+    user.username AS follower_username,
+    user.picture AS follower_picture,
+    user.email AS follower_email
+FROM user
+Inner JOIN friend
+	on user.id = friend.user_id
+GROUP BY follower_id
+
+----------------- VWFOLLOWERS -----------------------
+-----------------------------------------------------

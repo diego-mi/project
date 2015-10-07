@@ -13,6 +13,7 @@ $(document).ready(function () {
             $(".comment-container-" + postId).show();
             $.post("/add-comment", {postid: postId, content: content}, function (data) {
                 $(commentContainer).html(data.status);
+                $('.comment-link-getcomments-count-' + postId).html('(' + data.count + ')--');
                 $(inputComment)
                     .removeAttr('disabled')
                     .val('')

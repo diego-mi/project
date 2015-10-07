@@ -122,4 +122,11 @@ class PostService
         return $arrFollowingIds;
     }
 
+    public function getPost($intPostId, $intUserViewer)
+    {
+        $post = $this->em->getRepository('Post\Entity\VwPost')->find($intPostId);
+        $postsGostei = $this->em->getRepository('Gostei\Entity\Gostei')->getGostei($post->getPostId(), $intUserViewer);
+        $post = array(0 => $post);
+        return array('posts' => $post, 'gostei' => $postsGostei);
+    }
 }

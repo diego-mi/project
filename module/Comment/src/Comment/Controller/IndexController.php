@@ -27,7 +27,7 @@ class IndexController extends AbstractController
         $post = $this->getRequest()->getPost()->toArray();
         $htmlOutput = $this->getHtmlComments($post['postid']);
 
-        return new JsonModel(array('status' => $htmlOutput));
+        return new JsonModel(array('status' => $htmlOutput['html'], 'count' => $htmlOutput['count']));
     }
 
 
@@ -68,8 +68,10 @@ class IndexController extends AbstractController
             ->setTemplate('comment/index/index')
             ->setVariables(array('comments' => $comments));
 
-        return $this->getServiceLocator()
+        $commentsHtml = $this->getServiceLocator()
             ->get('viewrenderer')
             ->render($htmlViewPart);
+
+        return array('html' => $commentsHtml, 'count' => count($comments));
     }
 }

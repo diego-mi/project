@@ -87,8 +87,9 @@ class IndexController extends AbstractController
     public function viewAction()
     {
         $intPostId = $this->params()->fromRoute('id');
-        $post = $this->getEm()->getRepository($this->entity)->find($intPostId);
-        return new ViewModel(array('post' => $post));
+        $service = $this->getServiceLocator()->get($this->service);
+        $data = $service->getPost($intPostId, $this->identity()->getId());
+        return new ViewModel(array('list' => $data['posts'], 'gostei' => $data['gostei']));
     }
 
     /**

@@ -31,6 +31,7 @@ class IndexController extends AbstractController
         $service = $this->getServiceLocator()->get($this->service);
 
         $result = $service->gostei($data);
-        return new JsonModel(array('status' => $result));
+        $count = $service->count($data['postId']);
+        return new JsonModel(array('status' => $result, 'count'=>$count));
     }
 }

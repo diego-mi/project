@@ -15,17 +15,17 @@ SELECT
   user.picture AS user_picture,
   post_types.name AS post_type_name,
   post_types.id AS post_type_id,
-  COUNT(comment.id) AS post_comments_count,
-  COUNT(gostei.id) AS post_gostei_count
+  vwcommentcount.post_comment_count AS post_comments_count,
+  vwgosteicount.post_gostei_count AS post_gostei_count
 FROM posts
 INNER JOIN user
   ON posts.author_id = user.id
 INNER JOIN post_types
   ON posts.type = post_types.id
-LEFT JOIN comment
-  ON comment.post_id = posts.id
-LEFT join gostei
-  ON gostei.post_id = posts.id
+LEFT JOIN vwcommentcount
+  ON vwcommentcount.post_id = posts.id
+LEFT join vwgosteicount
+  ON vwgosteicount.post_id = posts.id
 GROUP By posts.id
 
 ----------------- VWPOSTS ---------------------------
@@ -44,7 +44,9 @@ select
 	user.id as notification_author_id,
 	user.name as notification_author_name,
 	user.picture as notification_author_picture,
-	notifications_types.output as notification_action_output
+	notifications_types.name as notification_action_name,
+	notifications_types.output as notification_action_output,
+	notifications_types.icon as notification_action_icon
 from notification
 inner join user
 	on user.id = notification.action_author_id
@@ -91,3 +93,51 @@ GROUP BY follower_id
 
 ----------------- VWFOLLOWERS -----------------------
 -----------------------------------------------------
+
+-------------------------------------------------------
+----------------- VWGOSTEICOUNT -----------------------
+CREATE VIEW vwgosteicount AS
+SELECT
+  posts.id AS post_id,
+  COUNT(gostei.id) AS post_gostei_count
+FROM posts
+LEFT join gostei
+  ON gostei.post_id = posts.id
+GROUP By posts.id
+
+----------------- VWGOSTEICOUNT -----------------------
+-------------------------------------------------------
+
+-------------------------------------------------------
+----------------- VWCOMMENTCOUNT -----------------------
+
+CREATE VIEW vwcommentcount AS
+SELECT
+  posts.id AS post_id,
+  COUNT(comment.id) AS post_comment_count
+FROM posts
+LEFT join comment
+  ON comment.post_id = posts.id
+GROUP By posts.id
+
+----------------- VWCOMMENTCOUNT -----------------------
+-------------------------------------------------------
+
+-------------------------------------------------------
+-------------------- VWCOMMENT ------------------------
+
+CREATE VIEW vwcomment AS
+select
+	comment.id as comment_id,
+	comment.content as comment_content,
+	comment.date as comment_date,
+	comment.post_id as comment_post_id,
+	user.id as comment_author_id,
+	user.name as comment_author_name,
+	user.picture as comment_author_picture
+from comment
+inner join user
+	on user.id = comment.action_author_id
+
+-------------------- VWCOMMENT ------------------------
+-------------------------------------------------------

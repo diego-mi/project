@@ -4,6 +4,16 @@ namespace Notification;
 return array(
     'router' => array(
         'routes' => array(
+            'notifications' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/notifications',
+                    'defaults' => array(
+                        'controller' => 'Notification\Controller\Index',
+                        'action'     => 'notifications',
+                    ),
+                ),
+            ),
             'get-notifications' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

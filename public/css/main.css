@@ -88,7 +88,7 @@ display: block; }
 /*     END POST       */
 
 /*     MENU USER       */
-.menu-user-picture {
+.menu-user-picture, .user-picture-sm {
     width: 48px;
     height: 48px;
 }
@@ -124,6 +124,11 @@ display: block; }
 /*     END FEED       */
 
 /*     BEGIN NOTIFICATION       */
+.notifications-layout {
+    max-height: 315px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
 .notification-item {}
 
 .notification-item-userPicture {

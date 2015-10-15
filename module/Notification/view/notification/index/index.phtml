@@ -33,7 +33,8 @@ if (!count($this->notifications)) {
                     <?php echo($notification->getNotificationActionOutput()); ?>
                     <a class="notification-item-post-link"
                        href="<?php echo($this->url('post') . '/view/' . $notification->getNotificationPostId()); ?>">
-                        post</a>.
+                        <?php if ($notification->getNotificationActionOutput() != 'está seguindo você') {echo('post');} ?>
+                    </a>.
                     <br>
                     <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
                 </div>
@@ -46,7 +47,7 @@ if (!count($this->notifications)) {
 ?>
 <li>
     <div class="text-center link-block">
-        <a href="mailbox.html">
+        <a href="/notifications">
             <i class="fa fa-envelope"></i> <strong>Veja todas as notificações</strong>
         </a>
     </div>

@@ -66,10 +66,8 @@ if ((isset($this->list)) && (!count($this->list))) {
                 <button
                     class="btn btn-xs btn-gostei <?php echo($getGostei ? 'btn-primary' : 'btn-white'); ?>"
                     data-postid="<?php echo($post->getPostId()); ?>">
-                    <i class="fa fa-heart"></i> Gostei
-                    <span class="btn-gostei-span-count-<?php echo($post->getPostId()); ?>">
-                        (<?php echo($post->getPostGosteiCount()) ?>)
-                    </span>
+                    <i class="fa fa-heart"></i>
+                    Gostei (<span class="btn-gostei-span-count-<?php echo($post->getPostId()); ?>"><?php echo($post->getPostGosteiCount()) ?></span>)
                 </button>
                 <!--<button
                     class="btn btn-white btn-xs btn-comments"
@@ -84,7 +82,7 @@ if ((isset($this->list)) && (!count($this->list))) {
         <div class="social-footer post-comments posts-comments-<?php echo($post->getPostid()); ?>">
             <!-- social-comment -->
             <div class="social-comment comment-infos">
-                <a href="#" class="comment-link-getcomments open" data-postid="<?php echo($post->getPostId()); ?>">
+                <a href="#" class="comment-link-getcomments open comment-link-getcomments-<?php echo($post->getPostId()); ?>" data-postid="<?php echo($post->getPostId()); ?>">
                     <small>
                         <span class="actionShow">Ver</span>
                         <span class="actionHide">Ocultar</span>

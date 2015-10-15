@@ -80,6 +80,20 @@ class VwNotification extends AbstractEntity
     private $notificationActionOutput;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="notification_action_name", type="string", nullable=true)
+     */
+    private $notificationActionName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="notification_action_icon", type="string", nullable=true)
+     */
+    private $notificationActionIcon;
+
+    /**
      * @return int
      */
     public function getNotificationId()
@@ -221,5 +235,37 @@ class VwNotification extends AbstractEntity
     public function setNotificationActionOutput($notificationActionOutput)
     {
         $this->notificationActionOutput = $notificationActionOutput;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotificationActionName()
+    {
+        return $this->notificationActionName;
+    }
+
+    /**
+     * @param string $notificationActionName
+     */
+    public function setNotificationActionName($notificationActionName)
+    {
+        $this->notificationActionName = $notificationActionName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotificationActionIcon()
+    {
+        return $this->notificationActionIcon;
+    }
+
+    /**
+     * @param string $notificationActionIcon
+     */
+    public function setNotificationActionIcon($notificationActionIcon)
+    {
+        $this->notificationActionIcon = $notificationActionIcon;
     }
 }

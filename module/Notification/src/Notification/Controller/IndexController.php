@@ -52,6 +52,11 @@ class IndexController extends AbstractController
         return array('html' => $notificationsHtml, 'count' => count($notifications));
     }
 
+    /**
+     * Metodo responsavel por mudar status da notificacao para visualizada
+     *
+     * @return JsonModel
+     */
     public function setNotificationToOldAction()
     {
         $post = $this->getRequest()->getPost()->toArray();
@@ -59,5 +64,15 @@ class IndexController extends AbstractController
         $service = $this->getServiceLocator()->get($this->service);
         $returnAction = $service->setNotificationToOld($intNotificationId);
         return new JsonModel(array('html' => $returnAction));
+    }
+
+    /**
+     * Metodo responsavel por carregar a view de visualizar notificacoes
+     */
+    public function notificationsAction() {
+        $notifications = $this->getEm()
+            ->getRepository('Notification\Entity\VwNotification')
+            ->getAllNotifications($this->identity()->getId());
+        return new ViewModel(array('notifications' => $notifications));
     }
 }

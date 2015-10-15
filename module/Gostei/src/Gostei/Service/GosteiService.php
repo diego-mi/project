@@ -4,6 +4,10 @@ namespace Gostei\Service;
 use Base\Service\AbstractService;
 use Doctrine\ORM\EntityManager;
 
+/**
+ * Class GosteiService
+ * @package Gostei\Service
+ */
 class GosteiService extends AbstractService
 {
     public function __construct(EntityManager $em)
@@ -37,6 +41,11 @@ class GosteiService extends AbstractService
         return '1';
     }
 
+
+    /**
+     * @param array $data
+     * @return string
+     */
     public function remove(Array $data = array())
     {
         $entity = $this->em->getRepository($this->entity)->findOneBy($data);
@@ -46,6 +55,18 @@ class GosteiService extends AbstractService
 
             return '2';
         }
+    }
+
+
+    /**
+     * @param array $data
+     *
+     * @return object
+     */
+    public function count($postId)
+    {
+        $arrCountGostei = $this->em->getRepository('Gostei\Entity\VwGosteiCount')->find($postId);
+        return $arrCountGostei->getPostGosteiCount();
     }
 
 }

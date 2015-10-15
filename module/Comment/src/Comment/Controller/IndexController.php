@@ -49,7 +49,7 @@ class IndexController extends AbstractController
 
         $htmlOutput = $this->getHtmlComments($post['postid']);
 
-        return new JsonModel(array('status' => $htmlOutput));
+        return new JsonModel(array('status' => $htmlOutput['html'], 'count' => $htmlOutput['count']));
     }
 
     /**
@@ -62,7 +62,7 @@ class IndexController extends AbstractController
     {
         $comments = $this->getEm()
             ->getRepository('Comment\Entity\VwComment')
-            ->findBy(array('commentPostId' => $intPostid));
+            ->findBy(array('commentPostId' => $intPostid),array('commentDate' => 'ASC'));
         $htmlViewPart = new ViewModel();
         $htmlViewPart->setTerminal(true)
             ->setTemplate('comment/index/index')

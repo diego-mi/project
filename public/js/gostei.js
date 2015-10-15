@@ -12,6 +12,7 @@ $(document).ready(function () {
             {
                 gosteiCancel('2', btnGostei);
             }
+            gosteiCounter(postId, data.count);
         });
     });
 
@@ -23,4 +24,7 @@ $(document).ready(function () {
         btnGostei.addClass('btn-white').removeClass('btn-primary');
     }
 
+    function gosteiCounter(postId, count) {
+        $(".btn-gostei-span-count-" + postId).html(count);
+    }
 });

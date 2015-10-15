@@ -161,6 +161,14 @@ CREATE TRIGGER generate_notification_comment_del AFTER DELETE ON comment
 
 delimiter ;
 
+----------------------------------------------------
+----------generate_notification_following-----------
+CREATE TRIGGER `generate_notification_following` AFTER INSERT ON `friend` FOR EACH ROW INSERT INTO notification
+SET
+post_id = 0,
+action_author_id = NEW.user_id,
+post_author_id = NEW.friend_id,
+action_id = 3
 ------------------------------------------------------
 --------------------- TRIGERS ------------------------
 ------------------------------------------------------

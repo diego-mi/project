@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProfileRepository extends EntityRepository
 {
+
+    public function searchByName($strName)
+    {
+        $query = $this->_em->createQuery(
+            'SELECT u
+              FROM Profile\Entity\Profile u
+              WHERE u.name LIKE "%' . $strName .'%"'
+        );
+        return $query->getResult();
+    }
 }

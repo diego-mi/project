@@ -49,8 +49,19 @@ class IndexController extends AbstractController
         return new ViewModel(array('friends' => $friends));
     }
 
+
+    public function verSeguindoSearchAction()
+    {
+        $strName = $this->params()->fromRoute('id');
+        $friends = $this->getEm()->getRepository('Profile\Entity\Profile')->searchByName($strName);
+        return new ViewModel(array('friends' => $friends));
+    }
+
+
+
     public function verSeguidoresAction()
     {
+
         $friends = $this->getEm()->getRepository('Friend\Entity\Followers')->findBy(
             array(
                 'followingId' => $this->identity()->getId()

@@ -18,9 +18,9 @@ SELECT
   vwcommentcount.post_comment_count AS post_comments_count,
   vwgosteicount.post_gostei_count AS post_gostei_count
 FROM posts
-INNER JOIN user
+LEFT JOIN user
   ON posts.author_id = user.id
-INNER JOIN post_types
+LEFT JOIN post_types
   ON posts.type = post_types.id
 LEFT JOIN vwcommentcount
   ON vwcommentcount.post_id = posts.id
